@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "version": "1.0.0",
+  "name": "NoirSight",
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": {
+      "16": "Logo.png",
+      "24": "Logo.png",
+      "32": "Logo.png",
+      "64": "Logo.png"
+    },
+    "default_title": "NoirSight - Your Security Our Responsibility"
+  },
+  "permissions": [
+    "scripting",
+    "activeTab",
+		"tabs"
+  ],
+  "host_permissions": ["<all_urls>"],
+  "icons": {
+    "16": "Logo.png",
+    "24": "Logo.png",
+    "32": "Logo.png",
+    "64": "Logo.png",
+    "128": "Logo.png"
+  }
+}
