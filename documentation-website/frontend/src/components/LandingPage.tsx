@@ -8,6 +8,7 @@ import SignupOverlay from './SignupOverlay';
 import { Eye, Shield, Search, AlertTriangle } from 'lucide-react';
 import ThreeBackground from './ThreeBackground';
 import { UserButton } from '@civic/auth/react';
+// import { useCivicAuth } from '@civic/auth-web3/react';
 
 const LandingPage = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -58,21 +59,7 @@ const LandingPage = () => {
           </div>
           <div className="flex items-center space-x-4">
             <UserButton />
-          </div>
-          {/* <div className="flex items-center space-x-4">
-            <button 
-              onClick={() => setShowLogin(true)}
-              className="enhanced-primary-button px-4 py-2 text-white rounded-lg font-medium text-sm inter-font"
-            >
-              Login
-            </button>
-            <button 
-              onClick={() => setShowSignup(true)}
-              className="enhanced-glass-button px-4 py-2 rounded-lg text-white text-sm font-medium inter-font"
-            >
-              Sign Up
-            </button>
-          </div> */}
+          </div>          
         </div>
       </nav>
 
@@ -105,10 +92,6 @@ const LandingPage = () => {
       {/* Hero Section */}
       <div className="relative z-10 w-full min-h-screen flex flex-col items-center justify-center px-6 py-20">
         <div className="max-w-6xl mx-auto text-center">
-          {/* <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white">
-            <h1 className="text-4xl text-center py-6 font-bold">Noir Sight — Eye of Truth</h1>
-            <EyeViewer />
-          </div> */}
           <div className="mb-8 float-animation">
             <p className="md:text-xl max-w-3xl leading-relaxed inter-font text-lg font-light text-gray-300 mx-auto mb-8">
               Cutting-edge surveillance technology powered by AI. Monitor, analyze, and detect threats 
@@ -123,12 +106,6 @@ const LandingPage = () => {
             >
               Learn More
             </button>
-            {/* <button 
-              onClick={() => setShowSignup(true)}
-              className="enhanced-glass-button min-w-40 inter-font text-sm font-medium text-white rounded-lg pt-3 pr-6 pb-3 pl-6"
-            >
-              Sign Up
-            </button> */}
           </div>
         </div>
       </div>

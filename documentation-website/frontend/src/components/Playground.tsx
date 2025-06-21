@@ -2,6 +2,7 @@ import { useState } from "react";
 import ThreeBackground from "./ThreeBackground";
 import TypingText from "./TypingText.tsx";
 import GlassDropdown from "./GlassDropdown.tsx";
+import { UserButton  } from "@civic/auth-web3/react";
 
 
 const Playground = () => {
@@ -77,6 +78,9 @@ const handleFileUpload = (e: any) => {
           >
             ← Go Back
           </button>
+          <div className="flex items-center space-x-4">
+            <UserButton />
+          </div>
         </div>
       </nav>
 
