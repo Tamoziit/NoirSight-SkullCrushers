@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routes import detect
+from app.routes import detect,analyze
 import logging
 
 # Set up logging
@@ -17,6 +17,7 @@ app.add_middleware(
 )
 
 app.include_router(detect.router, prefix="/api", tags=["detection"])
+app.include_router(analyze.router, prefix="/api", tags=["analysis"])
 
 @app.get("/")
 async def root():

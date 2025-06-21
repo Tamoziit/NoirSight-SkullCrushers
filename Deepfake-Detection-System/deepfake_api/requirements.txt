@@ -6,3 +6,9 @@ torchvision
 opencv-python
 python-multipart
 python-dotenv
+pydantic
+newspaper3k
+selenium
+webdriver-manager
+langchain
+langchain-google-genai
