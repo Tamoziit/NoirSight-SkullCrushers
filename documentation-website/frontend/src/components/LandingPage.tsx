@@ -7,7 +7,7 @@ import LoginOverlay from './LoginOverlay';
 import SignupOverlay from './SignupOverlay';
 import { Eye, Shield, Search, AlertTriangle } from 'lucide-react';
 import ThreeBackground from './ThreeBackground';
-import EyeViewer from './EyeViewer';
+import { UserButton } from '@civic/auth/react';
 
 const LandingPage = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -57,6 +57,9 @@ const LandingPage = () => {
             </button>
           </div>
           <div className="flex items-center space-x-4">
+            <UserButton />
+          </div>
+          {/* <div className="flex items-center space-x-4">
             <button 
               onClick={() => setShowLogin(true)}
               className="enhanced-primary-button px-4 py-2 text-white rounded-lg font-medium text-sm inter-font"
@@ -69,7 +72,7 @@ const LandingPage = () => {
             >
               Sign Up
             </button>
-          </div>
+          </div> */}
         </div>
       </nav>
 
