@@ -27,6 +27,7 @@ export interface User {
     profilePic?: string | null;
     gender: "M" | "F" | "O";
     uploads: Types.ObjectId[];
+    threads: Types.ObjectId[];
 }
 
 export interface Uploads {
@@ -51,5 +52,9 @@ export interface UploadProps {
 
 export interface FeedbackProps {
     feedback: "yes" | "no";
-    id: Types.ObjectId
+    id: Types.ObjectId;
+}
+
+export interface ThreadProps {
+    text: string;
 }
