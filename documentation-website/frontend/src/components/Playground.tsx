@@ -3,7 +3,7 @@ import ThreeBackground from "./ThreeBackground";
 import TypingText from "./TypingText.tsx";
 import GlassDropdown from "./GlassDropdown.tsx";
 import { UserButton } from "@civic/auth-web3/react";
-import { uploadBlobToCloudinary } from "@/utils/uploadToCloudinary"; // ✅ IMPORTED FROM UTILS
+import { uploadBlobToCloudinary } from "@/utils/uploadToCloudinary";
 
 const Playground = () => {
   const [selectedUtility, setSelectedUtility] = useState("Article");
