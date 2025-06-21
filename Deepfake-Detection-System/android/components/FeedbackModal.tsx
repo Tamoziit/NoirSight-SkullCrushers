@@ -1,12 +1,30 @@
+import usePostFeedback from '@/hooks/usePostFeedback';
 import { Modal, View, Text, Pressable } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 
 type FeedbackModalProps = {
+	id: string;
 	modalVisible: boolean;
 	setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const FeedbackModal = ({ modalVisible, setModalVisible }: FeedbackModalProps) => {
+const FeedbackModal = ({ id, modalVisible, setModalVisible }: FeedbackModalProps) => {
+	const { loading, postFeedback } = usePostFeedback();
+
+	const postNegativeReview = async () => {
+		await postFeedback({
+			feedback: "yes",
+			id
+		});
+	}
+
+	const postPositiveReview = async () => {
+		await postFeedback({
+			feedback: "no",
+			id
+		});
+	}
+
 	return (
 		<Modal
 			animationType="fade"
@@ -33,9 +51,10 @@ const FeedbackModal = ({ modalVisible, setModalVisible }: FeedbackModalProps) =>
 						<Pressable
 							className="bg-red-500 px-5 py-2 rounded-lg"
 							onPress={() => {
-								console.log("User voted: Yes (Fake)");
+								postNegativeReview();
 								setModalVisible(false);
 							}}
+							disabled={loading}
 						>
 							<Text className="text-white font-semibold">Yes</Text>
 						</Pressable>
@@ -43,9 +62,10 @@ const FeedbackModal = ({ modalVisible, setModalVisible }: FeedbackModalProps) =>
 						<Pressable
 							className="bg-green-500 px-5 py-2 rounded-lg"
 							onPress={() => {
-								console.log("User voted: No (Authentic)");
+								postPositiveReview();
 								setModalVisible(false);
 							}}
+							disabled={loading}
 						>
 							<Text className="text-white font-semibold">No</Text>
 						</Pressable>

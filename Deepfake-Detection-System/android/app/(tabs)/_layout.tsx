@@ -77,6 +77,21 @@ const _layout = () => {
 			/>
 
 			<Tabs.Screen
+				name="Threads"
+				options={{
+					title: 'Threads',
+					tabBarIcon: ({ focused }) => (
+						<TabIcon
+							focused={focused}
+							icon={icons.threads}
+							title="Threads"
+						/>
+					),
+					headerShown: false,
+				}}
+			/>
+
+			<Tabs.Screen
 				name="Upload"
 				options={{
 					title: 'Upload',

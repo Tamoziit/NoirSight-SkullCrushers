@@ -11,6 +11,7 @@ import password from "@/assets/icons/password.png";
 import logout from "@/assets/icons/logout.png";
 import mobile from "@/assets/icons/mobile.png";
 import gender from "@/assets/icons/gender.png";
+import threads from "@/assets/icons/threads.png";
 
 export const icons = {
   home,
@@ -25,5 +26,6 @@ export const icons = {
   password,
   logout,
   mobile,
-  gender
+  gender,
+  threads
 };

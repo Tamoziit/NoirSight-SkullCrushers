@@ -50,6 +50,6 @@ export interface UploadProps {
 }
 
 export interface FeedbackProps {
-    feedback: "yes" | "no" | "don't know";
+    feedback: "yes" | "no";
     id: Types.ObjectId
 }

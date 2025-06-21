@@ -7,7 +7,7 @@ import FeedbackModal from './FeedbackModal';
 import { PostProps } from '@/interfaces/interfaces';
 import { images } from '@/constants/images';
 
-const PostCard = ({ post: { userId, type, url, modelResult, confidence, createdAt, positiveReviews, negativeReviews }, index }: PostProps) => {
+const PostCard = ({ post: { _id, userId, type, url, modelResult, confidence, createdAt, positiveReviews, negativeReviews }, index }: PostProps) => {
 	const [modalVisible, setModalVisible] = useState(false);
 
 	return (
@@ -93,6 +93,7 @@ const PostCard = ({ post: { userId, type, url, modelResult, confidence, createdA
 
 			{modalVisible && (
 				<FeedbackModal
+					id={_id}
 					modalVisible={modalVisible}
 					setModalVisible={setModalVisible}
 				/>
