@@ -1,22 +1,46 @@
 import ThreeBackground from './ThreeBackground';
 import { Link } from 'react-router-dom';
+import { UserButton } from '@civic/auth-web3/react';
 
 
 const Homepage = () => {
   return (
     <div className="min-h-screen bg-black">
-      <ThreeBackground />
+      <ThreeBackground />  
       
       {/* Navigation */}
       <nav className="relative z-10 w-full px-6 py-4">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
+          {/* Left: Logo */}
           <div className="flex items-center space-x-3">
             <img src="/eye.png" alt="Noir Sight Logo" className="w-6 h-6" />
             <span className="geist-font text-xl font-bold text-white">Noir Sight</span>
           </div>
-          
+
+          {/* Center: Docs & Playground */}
+          <div className="flex space-x-6">
+            <Link
+              to="/docs"
+              className="text-sm text-gray-300 hover:text-white transition-colors inter-font"
+            >
+              Docs
+            </Link>
+            <Link
+              to="/playground"
+              className="text-sm text-gray-300 hover:text-white transition-colors inter-font"
+            >
+              Playground
+            </Link>
+          </div>
+
+          {/* Right: User Button */}
+          <div className="flex items-center space-x-4">
+            <UserButton />
+          </div>
         </div>
       </nav>
+
+
 
       <div className="relative z-10 divider"></div>
 
