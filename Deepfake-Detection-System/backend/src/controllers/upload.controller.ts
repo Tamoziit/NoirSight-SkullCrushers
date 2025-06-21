@@ -108,13 +108,13 @@ export const updateFeedback = async (req: Request, res: Response) => {
             return;
         }
 
-        if (feedback !== "yes" && feedback !== "no" && feedback !== "don't know") {
+        if (feedback !== "yes" && feedback !== "no") {
             res.status(400).json({ error: "Invalid Feedback" });
             return;
         }
 
         if (!id) {
-            res.status(400).json({ error: "Video id is required" });
+            res.status(400).json({ error: "Post id is required" });
             return;
         }
 

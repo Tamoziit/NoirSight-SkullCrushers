@@ -81,3 +81,8 @@ interface UploadFlagProps {
   modelResult: "fake" | "real";
   confidence: number;
 }
+
+interface FeedbackProps {
+  feedback: "yes" | "no";
+  id: string;
+}
