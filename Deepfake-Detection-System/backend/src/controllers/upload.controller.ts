@@ -2,6 +2,9 @@ import { Request, Response } from "express";
 import User from "../models/user.model";
 import Upload from "../models/uploads.model";
 import { FeedbackProps, UploadProps } from "../types";
+import { DeepfakeImageAnalyser, DeepfakeVideoAnalyser } from "noirsight";
+
+const apiKey = process.env.NOIR_SIGHT_API_KEY!;
 
 export const upload = async (req: Request, res: Response) => {
     try {
@@ -19,12 +22,21 @@ export const upload = async (req: Request, res: Response) => {
             return;
         }
 
+        let response;
+        if (type === "video") {
+            const videoAnalyser = new DeepfakeVideoAnalyser(apiKey, url);
+            response = await videoAnalyser.analyseVideo();
+        } else {
+            const imageAnalyser = new DeepfakeImageAnalyser(apiKey, url);
+            response = await imageAnalyser.analyseImage();
+        }
+
         const newVideo = new Upload({
             userId: id,
             type,
             url,
-            modelResult: "fake",
-            confidence: 0.9532 * 100
+            modelResult: response.label,
+            confidence: response.confidence * 100
         });
 
         if (newVideo) {
