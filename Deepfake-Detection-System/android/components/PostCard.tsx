@@ -44,7 +44,7 @@ const PostCard = ({ post: { userId, type, url, modelResult, confidence, createdA
 				<View className='flex flex-col gap-0.5 px-3 py-1.5'>
 					<View className='flex flex-row items-center gap-1.5'>
 						<FontAwesome name="exclamation-circle" size={30} color="#ef4444" />
-						<Text className='text-red-500'>This video might potentially be a Deepfake</Text>
+						<Text className='text-red-500'>This {type} might potentially be a Deepfake</Text>
 					</View>
 
 					<View className='flex flex-row items-center gap-1.5'>
@@ -56,7 +56,7 @@ const PostCard = ({ post: { userId, type, url, modelResult, confidence, createdA
 				<View className='flex flex-col gap-0.5 px-3 py-1.5'>
 					<View className='flex flex-row items-center gap-1.5'>
 						<FontAwesome name="check-circle" size={30} color="#22c55e" />
-						<Text className='text-green-500'>This video is authentic</Text>
+						<Text className='text-green-500'>This {type} is authentic</Text>
 					</View>
 
 					<View className='flex flex-row items-center gap-1.5'>

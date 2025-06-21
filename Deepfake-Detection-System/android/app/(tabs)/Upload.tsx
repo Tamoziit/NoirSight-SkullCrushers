@@ -8,12 +8,17 @@ import { Video, ResizeMode } from 'expo-av';
 import { uploadVideoToCloudinary } from '@/utils/uploadVideoToCloudinary';
 import Toast from 'react-native-toast-message';
 import { uploadImageToCloudinary } from '@/utils/uploadImageToCloudinary';
+import useUploadPost from '@/hooks/useUploadPost';
+import { ModelResponse } from '@/interfaces/interfaces';
+import ModelResult from '@/components/ModelResult';
 
 const Upload = () => {
   const [fileType, setFileType] = useState<'image' | 'video'>('video');
   const [media, setMedia] = useState<DocumentPicker.DocumentPickerAsset | null>(null);
   const [mediaUrl, setMediaUrl] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
+  const { loading, uploadPost } = useUploadPost();
+  const [modelResponse, setModelResponse] = useState<ModelResponse | null>(null);
 
   const pickFile = async () => {
     try {
@@ -57,9 +62,21 @@ const Upload = () => {
       if (fileType === "video") {
         const uploadedUrl = await uploadVideoToCloudinary(media);
         setMediaUrl(uploadedUrl);
+
+        const data = await uploadPost({
+          url: uploadedUrl,
+          type: "video"
+        });
+        setModelResponse(data);
       } else {
         const uploadedUrl = await uploadImageToCloudinary(media);
         setMediaUrl(uploadedUrl);
+
+        const data = await uploadPost({
+          url: uploadedUrl,
+          type: "image"
+        });
+        setModelResponse(data);
       }
 
       Toast.show({
@@ -78,8 +95,6 @@ const Upload = () => {
       setUploading(false);
     }
   };
-
-  console.log("Url", mediaUrl);
 
   return (
     <SafeAreaView className="flex-1 bg-black">
@@ -101,6 +116,8 @@ const Upload = () => {
               onPress={() => {
                 setFileType('image');
                 setMedia(null);
+                setMediaUrl(null);
+                setModelResponse(null);
               }}
             >
               <Text className="text-white">Image</Text>
@@ -112,6 +129,8 @@ const Upload = () => {
               onPress={() => {
                 setFileType('video');
                 setMedia(null);
+                setMediaUrl(null);
+                setModelResponse(null);
               }}
             >
               <Text className="text-white">Video</Text>
@@ -153,9 +172,9 @@ const Upload = () => {
           <TouchableOpacity
             className="btn-secondary"
             onPress={handleUpload}
-            disabled={uploading}
+            disabled={uploading || loading}
           >
-            {uploading ? (
+            {uploading || loading ? (
               <ActivityIndicator
                 size="small"
                 color="#ffffff"
@@ -164,6 +183,14 @@ const Upload = () => {
               <Text className="text-white text-center text-base">Upload {fileType}</Text>
             )}
           </TouchableOpacity>
+
+          {modelResponse && (
+            <ModelResult
+              type={modelResponse.type}
+              modelResult={modelResponse.modelResult}
+              confidence={modelResponse.confidence}
+            />
+          )}
         </View>
       </LinearGradient>
     </SafeAreaView>
