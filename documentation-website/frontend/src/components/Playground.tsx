@@ -1,18 +1,16 @@
 import { useState } from "react";
 import ThreeBackground from "./ThreeBackground";
 import TypingText from "./TypingText.tsx";
-import GlassDropdown from "./GlassDropdown.tsx";
 import { UserButton } from "@civic/auth-web3/react";
 import { uploadBlobToCloudinary } from "@/utils/uploadToCloudinary";
-import { DeepfakeImageAnalyser, DeepfakeVideoAnalyser } from "noirsight";
-
+import { ArticleAnalyser, DeepfakeImageAnalyser, DeepfakeVideoAnalyser } from "noirsight";
 
 const Playground = () => {
   const [selectedUtility, setSelectedUtility] = useState("Article");
   const [inputValue, setInputValue] = useState("");
   const [threads, setThreads] = useState<any[]>([]);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!inputValue && selectedUtility === "Article") return;
 
     const userEntry = { type: selectedUtility, content: inputValue };
@@ -21,23 +19,61 @@ const Playground = () => {
     setThreads((prev) => [...prev, placeholder]);
     setInputValue("");
 
-    setTimeout(() => {
-      const modelResponse = {
-        content:
-          selectedUtility === "Article"
-            ? "✅ This article seems credible with no red flags. [LLM Output]"
-            : `Analyzing the ${selectedUtility.toLowerCase()}...`,
-      };
+    if (selectedUtility === "Article") {
+      try {
+        const articleAnalyzer = new ArticleAnalyser("gjyygscsc333");
+        const response = await articleAnalyzer.analyseArticle(inputValue);
 
-      setThreads((prev) => {
-        const updated = [...prev];
-        updated[updated.length - 1].model = modelResponse;
-        return updated;
-      });
-    }, 2000);
+        if ("error" in response) {
+          throw new Error(response.message || "Failed to analyze article.");
+        }
+
+        const { classification, reasons, related_articles } = response as any;
+
+        const relevantArticles = related_articles.filter(
+          (article) => article.verdict.toLowerCase() !== "not relevant"
+        );
+
+        const modelOutput = [
+          `🧠 Classification: ${classification}`,
+          `📌 Reasons:\n${reasons.map((r) => `• ${r}`).join("\n")}`,
+          relevantArticles.length > 0
+            ? `🔗 Related Articles:\n${relevantArticles
+              .map((a) => `- ${a.url} (${a.verdict})`)
+              .join("\n")}`
+            : `🚫 No relevant articles found.`
+        ].join("\n\n");
+
+        setThreads((prev) => {
+          const updated = [...prev];
+          updated[updated.length - 1].model = { content: modelOutput };
+          return updated;
+        });
+      } catch (err) {
+        setThreads((prev) => {
+          const updated = [...prev];
+          updated[updated.length - 1].model = {
+            content: `❌ Failed to analyze article. ${(err as Error).message}`
+          };
+          return updated;
+        });
+      }
+    } else {
+      // Fallback for non-article types
+      setTimeout(() => {
+        const modelResponse = {
+          content: `Analyzing the ${selectedUtility.toLowerCase()}...`,
+        };
+
+        setThreads((prev) => {
+          const updated = [...prev];
+          updated[updated.length - 1].model = modelResponse;
+          return updated;
+        });
+      }, 2000);
+    }
   };
 
-  // Inside Playground component
   const handleFileUpload = async (e: any) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -58,7 +94,7 @@ const Playground = () => {
 
     // Analyze using NoirSight
     try {
-      const apiKey = "hbcjfgdsgfeufw"; // Replace with your logic
+      const apiKey = "hbcjfgdsgfeufw";
       let response;
 
       if (mediaType === "video") {
@@ -145,8 +181,8 @@ const Playground = () => {
       {/* Bottom Input Area */}
       <div
         className={`z-10 px-6 ${threads.length === 0
-            ? "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-            : "fixed bottom-4 left-0 right-0"
+          ? "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+          : "fixed bottom-4 left-0 right-0"
           }`}
       >
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-4">

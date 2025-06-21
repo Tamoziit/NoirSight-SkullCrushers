@@ -1,4 +1,3 @@
-
 import { CivicAuthProvider as Web2AuthProvider } from "@civic/auth/react";
 import { CivicAuthProvider as Web3AuthProvider } from "@civic/auth-web3/react";
 import { Toaster } from "@/components/ui/toaster";
@@ -11,7 +10,7 @@ import Landing from "./pages/Landing";
 import NotFound from "./pages/NotFound";
 import Playground from "./components/Playground";
 import Documentation from "./components/Documentation";
-
+import ApiKeyPage from "./components/ApiKeyPage";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +27,7 @@ const App = () => (
               <Route path="/home" element={<Index />} />
               <Route path="/playground" element={<Playground />} />
               <Route path="/docs" element={<Documentation />} />
+              <Route path="/apikey" element={<ApiKeyPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
