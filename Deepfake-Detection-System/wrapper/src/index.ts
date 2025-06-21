@@ -1,5 +1,6 @@
 import axios, { Axios } from "axios";
 import { PostResponse, WrapperError } from "./types";
+import refineConfidence from "./utils/refineConfidence";
 
 export class NoirSight {
     public apiKey: string;
@@ -28,8 +29,9 @@ export class DeepfakeVideoAnalyser extends NoirSight {
             const response = await axios.post(`${this.baseUrl}/predict/video/url`, {
                 url: this.url
             });
+            const result = refineConfidence({ ...response.data });
 
-            return response.data;
+            return result;
         } catch (error: unknown) {
             if (axios.isAxiosError(error)) {
                 if (error.response) {
@@ -73,8 +75,9 @@ export class DeepfakeImageAnalyser extends NoirSight {
             const response = await axios.post(`${this.baseUrl}/predict/image/url`, {
                 url: this.url
             });
-
-            return response.data;
+            const result = refineConfidence({ ...response.data });
+            
+            return result;
         } catch (error: unknown) {
             if (axios.isAxiosError(error)) {
                 if (error.response) {
