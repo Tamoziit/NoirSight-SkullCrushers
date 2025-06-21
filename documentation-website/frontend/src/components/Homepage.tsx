@@ -1,4 +1,6 @@
 import ThreeBackground from './ThreeBackground';
+import { Link } from 'react-router-dom';
+
 
 const Homepage = () => {
   return (
@@ -31,13 +33,14 @@ const Homepage = () => {
               Using advanced machine learning and vision models, we aim to empower users against misinformation.
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">            
-            <button className="enhanced-primary-button px-6 py-3 text-white rounded-lg font-medium text-sm min-w-40 inter-font">
-              Go to Playground
-            </button>
-          </div>
+          <Link
+            to="/playground"
+            className="enhanced-primary-button px-6 py-3 text-white rounded-lg font-medium text-sm min-w-40 inter-font"
+          >
+            Go to Playground
+          </Link>
 
-          <div className="divider mb-16"></div>
+          <div className="mb-16"></div>         
 
           {/* Featured Projects */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6 max-w-6xl mx-auto mb-16">
@@ -127,10 +130,6 @@ const Homepage = () => {
 
           <div className="hidden sm:block w-px h-12 bg-gradient-to-b from-transparent via-white/20 to-transparent"></div>
 
-          {/* <div>
-            <div className="text-3xl md:text-4xl font-light text-white mb-1 geist-font tracking-tight">Web3</div>
-            <div className="text-gray-400 text-sm inter-font font-normal">Proof of Authenticity on-chain</div>
-          </div> */}
         </div>
         </div>
 
