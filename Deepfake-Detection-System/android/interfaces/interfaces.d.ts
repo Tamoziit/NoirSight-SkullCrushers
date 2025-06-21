@@ -77,7 +77,7 @@ interface ModelResponse {
 }
 
 interface UploadFlagProps {
-  type: "image" | "video"; 
+  type: "image" | "video";
   modelResult: "fake" | "real";
   confidence: number;
 }
@@ -85,4 +85,26 @@ interface UploadFlagProps {
 interface FeedbackProps {
   feedback: "yes" | "no";
   id: string;
+}
+
+interface Thread {
+  _id: string;
+  userId: {
+    _id: string;
+    username: string;
+    email: string;
+    profilePic?: string | null;
+  };
+  text: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface ThreadProps {
+  thread: Thread;
+  index: number;
+}
+
+interface UploadThreadProps {
+  text: string;
 }

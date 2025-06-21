@@ -92,6 +92,21 @@ const _layout = () => {
 			/>
 
 			<Tabs.Screen
+				name="UploadThread"
+				options={{
+					title: 'Post Thread',
+					tabBarIcon: ({ focused }) => (
+						<TabIcon
+							focused={focused}
+							icon={icons.pen}
+							title="Post Thread"
+						/>
+					),
+					headerShown: false,
+				}}
+			/>
+
+			<Tabs.Screen
 				name="Upload"
 				options={{
 					title: 'Upload',
@@ -100,21 +115,6 @@ const _layout = () => {
 							focused={focused}
 							icon={icons.upload}
 							title="Upload"
-						/>
-					),
-					headerShown: false,
-				}}
-			/>
-
-			<Tabs.Screen
-				name="Profile"
-				options={{
-					title: 'Profile',
-					tabBarIcon: ({ focused }) => (
-						<TabIcon
-							focused={focused}
-							icon={icons.person}
-							title="Profile"
 						/>
 					),
 					headerShown: false,
