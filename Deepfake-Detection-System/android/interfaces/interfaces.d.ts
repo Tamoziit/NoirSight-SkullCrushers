@@ -57,3 +57,27 @@ interface PostProps {
   post: Post;
   index: number;
 }
+
+interface UploadProps {
+  url: string;
+  type: "image" | "video";
+}
+
+interface ModelResponse {
+  _id: string;
+  userId: string;
+  type: "video" | "image";
+  url: string;
+  modelResult: "fake" | "real";
+  confidence: number;
+  positiveReviews: number;
+  negativeReviews: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface UploadFlagProps {
+  type: "image" | "video"; 
+  modelResult: "fake" | "real";
+  confidence: number;
+}
