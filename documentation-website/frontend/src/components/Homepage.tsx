@@ -6,8 +6,8 @@ import { UserButton } from '@civic/auth-web3/react';
 const Homepage = () => {
   return (
     <div className="min-h-screen bg-black">
-      <ThreeBackground />  
-      
+      <ThreeBackground />
+
       {/* Navigation */}
       <nav className="relative z-10 w-full px-6 py-4">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
@@ -57,14 +57,23 @@ const Homepage = () => {
               Using advanced machine learning and vision models, we aim to empower users against misinformation.
             </p>
           </div>
-          <Link
-            to="/playground"
-            className="enhanced-primary-button px-6 py-3 text-white rounded-lg font-medium text-sm min-w-40 inter-font"
-          >
-            Go to Playground
-          </Link>
+          <div className='flex flex-col sm:flex-row justify-center items-center gap-2'>
+            <Link
+              to="/playground"
+              className="enhanced-primary-button px-6 py-3 text-white rounded-lg font-medium text-sm min-w-40 inter-font"
+            >
+              Go to Playground
+            </Link>
+            <Link
+              to="/apikey"
+              className="enhanced-primary-button px-6 py-3 text-white rounded-lg font-medium text-sm min-w-40 inter-font ml-4"
+            >
+              Create API Key
+            </Link>
+          </div>
 
-          <div className="mb-16"></div>         
+
+          <div className="mb-16"></div>
 
           {/* Featured Projects */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6 max-w-6xl mx-auto mb-16">
@@ -138,23 +147,23 @@ const Homepage = () => {
 
           <div className="divider mb-16"></div>
 
-          
+
           <div className="flex flex-col sm:flex-row justify-center items-center gap-8 text-center">
-          <div>
-            <div className="text-3xl md:text-4xl font-light text-white mb-1 geist-font tracking-tight">99.2%</div>
-            <div className="text-gray-400 text-sm inter-font font-normal">Image Detection Accuracy</div>
+            <div>
+              <div className="text-3xl md:text-4xl font-light text-white mb-1 geist-font tracking-tight">99.2%</div>
+              <div className="text-gray-400 text-sm inter-font font-normal">Image Detection Accuracy</div>
+            </div>
+
+            <div className="hidden sm:block w-px h-12 bg-gradient-to-b from-transparent via-white/20 to-transparent"></div>
+
+            <div>
+              <div className="text-3xl md:text-4xl font-light text-white mb-1 geist-font tracking-tight">Real-Time</div>
+              <div className="text-gray-400 text-sm inter-font font-normal">Fake News Verification</div>
+            </div>
+
+            <div className="hidden sm:block w-px h-12 bg-gradient-to-b from-transparent via-white/20 to-transparent"></div>
+
           </div>
-
-          <div className="hidden sm:block w-px h-12 bg-gradient-to-b from-transparent via-white/20 to-transparent"></div>
-
-          <div>
-            <div className="text-3xl md:text-4xl font-light text-white mb-1 geist-font tracking-tight">Real-Time</div>
-            <div className="text-gray-400 text-sm inter-font font-normal">Fake News Verification</div>
-          </div>
-
-          <div className="hidden sm:block w-px h-12 bg-gradient-to-b from-transparent via-white/20 to-transparent"></div>
-
-        </div>
         </div>
 
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-gray-400">
