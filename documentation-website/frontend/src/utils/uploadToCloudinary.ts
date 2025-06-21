@@ -1,4 +1,3 @@
-// src/utils/uploadToCloudinary.ts
 import toast from "react-hot-toast";
 
 export const uploadBlobToCloudinary = async (
@@ -10,7 +9,7 @@ export const uploadBlobToCloudinary = async (
       ? "https://api.cloudinary.com/v1_1/dhjyjsyvt/image/upload"
       : "https://api.cloudinary.com/v1_1/dhjyjsyvt/video/upload";
 
-  const uploadPreset = "Deepfake-Detection-Service";
+  const uploadPreset = "NoirSight";
   const formData = new FormData();
   formData.append("upload_preset", uploadPreset);
 
