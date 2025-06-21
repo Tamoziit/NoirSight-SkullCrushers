@@ -108,3 +108,15 @@ interface ThreadProps {
 interface UploadThreadProps {
   text: string;
 }
+
+export interface RelatedArticles {
+  url: string;
+  verdict: "strongly relevant and consistent" | "strongly relevant but inconsistent" | "weakly relevant" | "not relevant";
+  gemini_analysis?: string | null;
+}
+
+export interface ArticleResponse {
+  classification: "contextual" | "factual";
+  reasons: string[];
+  related_articles: RelatedArticles[];
+}

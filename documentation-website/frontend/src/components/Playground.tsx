@@ -4,6 +4,8 @@ import TypingText from "./TypingText.tsx";
 import GlassDropdown from "./GlassDropdown.tsx";
 import { UserButton } from "@civic/auth-web3/react";
 import { uploadBlobToCloudinary } from "@/utils/uploadToCloudinary";
+import { DeepfakeImageAnalyser, DeepfakeVideoAnalyser } from "noirsight";
+
 
 const Playground = () => {
   const [selectedUtility, setSelectedUtility] = useState("Article");
@@ -35,6 +37,7 @@ const Playground = () => {
     }, 2000);
   };
 
+  // Inside Playground component
   const handleFileUpload = async (e: any) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -49,12 +52,27 @@ const Playground = () => {
     };
     setThreads((prev) => [...prev, placeholder]);
 
+    // Upload to Cloudinary
     const uploadedUrl = await uploadBlobToCloudinary(mediaURL, mediaType);
     if (!uploadedUrl) return;
 
-    setTimeout(() => {
+    // Analyze using NoirSight
+    try {
+      const apiKey = "hbcjfgdsgfeufw"; // Replace with your logic
+      let response;
+
+      if (mediaType === "video") {
+        const videoAnalyser = new DeepfakeVideoAnalyser(apiKey, uploadedUrl);
+        response = await videoAnalyser.analyseVideo();
+      } else {
+        const imageAnalyser = new DeepfakeImageAnalyser(apiKey, uploadedUrl);
+        response = await imageAnalyser.analyseImage();
+      }
+
+      const { label, confidence } = response;
+
       const modelResponse = {
-        content: `✅ The uploaded ${mediaType} appears to be authentic. [AI Output]\nCloudinary URL: ${uploadedUrl}`,
+        content: `🧠 *AI Verdict:* ${label}\n🔍 *Confidence:* ${(confidence * 100).toFixed(2)}%`,
       };
 
       setThreads((prev) => {
@@ -62,7 +80,16 @@ const Playground = () => {
         updated[updated.length - 1].model = modelResponse;
         return updated;
       });
-    }, 2000);
+    } catch (error) {
+      setThreads((prev) => {
+        const updated = [...prev];
+        updated[updated.length - 1].model = {
+          content: "❌ Failed to analyze media. Please try again later.",
+        };
+        return updated;
+      });
+      console.error("Media analysis error:", error);
+    }
   };
 
   return (
@@ -117,11 +144,10 @@ const Playground = () => {
 
       {/* Bottom Input Area */}
       <div
-        className={`z-10 px-6 ${
-          threads.length === 0
+        className={`z-10 px-6 ${threads.length === 0
             ? "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
             : "fixed bottom-4 left-0 right-0"
-        }`}
+          }`}
       >
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-4">
           <div className="relative w-full sm:w-auto">

@@ -205,7 +205,6 @@ def analyze_paragraph(input_data: ParagraphInput):
         return {
             "classification": classification,
             "reasons": reasons,
-            "keywords": keywords,
             "related_articles": [],
             "message": "No related news articles found."
         }
@@ -223,6 +222,5 @@ def analyze_paragraph(input_data: ParagraphInput):
     return {
         "classification": classification,
         "reasons": reasons,
-        "keywords": keywords,
         "related_articles": results
     }

@@ -2,6 +2,9 @@ import { Request, Response } from "express";
 import User from "../models/user.model";
 import Thread from "../models/threads.model";
 import { ThreadProps } from "../types";
+import { ArticleAnalyser } from "noirsight";
+
+const apiKey = process.env.NOIR_SIGHT_API_KEY!;
 
 export const uploadThread = async (req: Request, res: Response) => {
     try {
@@ -90,6 +93,25 @@ export const getThreads = async (req: Request, res: Response) => {
         });
     } catch (error) {
         console.log("Error in getUploads controller", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+}
+
+export const analyseThread = async (req: Request, res: Response) => {
+    try {
+        const { text }: ThreadProps = req.body;
+
+        if (!text) {
+            res.status(400).json({ error: "Text is required" });
+            return;
+        }
+
+        const articleAnalyzer = new ArticleAnalyser(apiKey);
+        const response = await articleAnalyzer.analyseArticle(text);
+
+        res.status(200).json(response);
+    } catch (error) {
+        console.log("Error in analyseThreads controller", error);
         res.status(500).json({ error: "Internal Server Error" });
     }
 }
