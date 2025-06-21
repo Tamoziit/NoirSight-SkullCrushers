@@ -1,5 +1,5 @@
 import axios, { Axios } from "axios";
-import { PostResponse, WrapperError } from "./types";
+import { ArticleResponse, PostResponse, WrapperError } from "./types";
 import refineConfidence from "./utils/refineConfidence";
 
 export class NoirSight {
@@ -76,8 +76,50 @@ export class DeepfakeImageAnalyser extends NoirSight {
                 url: this.url
             });
             const result = refineConfidence({ ...response.data });
-            
+
             return result;
+        } catch (error: unknown) {
+            if (axios.isAxiosError(error)) {
+                if (error.response) {
+                    return {
+                        error: true,
+                        status: error.response.status,
+                        data: error.response.data,
+                        message: error.response.data?.error || 'Something went wrong! Please try again later'
+                    };
+                } else if (error.request) {
+                    return {
+                        error: true,
+                        message: 'No response from server. Network issue?'
+                    };
+                }
+            }
+
+            return {
+                error: true,
+                message: 'Unexpected error occurred.',
+                detail: (error as Error).message
+            };
+        }
+    }
+}
+
+export class ArticleAnalyser extends NoirSight {
+    constructor(apiKey: string) {
+        super(apiKey);
+    }
+
+    async analyseArticle(text: string): Promise<ArticleResponse | WrapperError> {
+        try {
+            if (!this.apiKey) {
+                throw new Error("Cannot find API KEY");
+            }
+
+            const response = await axios.post(`${this.baseUrl}/analyze`, {
+                text
+            });
+
+            return response.data;
         } catch (error: unknown) {
             if (axios.isAxiosError(error)) {
                 if (error.response) {
