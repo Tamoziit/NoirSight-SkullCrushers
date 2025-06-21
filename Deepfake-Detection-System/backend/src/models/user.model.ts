@@ -34,6 +34,12 @@ const UserSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "Uploads"
         }
+    ],
+    threads: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Threads"
+        }
     ]
 }, { timestamps: true });
 

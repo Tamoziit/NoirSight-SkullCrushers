@@ -31,7 +31,7 @@ export const upload = async (req: Request, res: Response) => {
             response = await imageAnalyser.analyseImage();
         }
 
-        const newVideo = new Upload({
+        const newPost = new Upload({
             userId: id,
             type,
             url,
@@ -39,18 +39,18 @@ export const upload = async (req: Request, res: Response) => {
             confidence: response.confidence * 100
         });
 
-        if (newVideo) {
+        if (newPost) {
             await Promise.all([
-                newVideo.save(),
+                newPost.save(),
                 (async () => {
-                    user.uploads.push(newVideo._id);
+                    user.uploads.push(newPost._id);
                     await user.save();
                 })(),
             ]);
 
-            res.status(201).json(newVideo);
+            res.status(201).json(newPost);
         } else {
-            res.status(400).json({ error: "Couldn't Upload video" });
+            res.status(400).json({ error: "Couldn't Upload Post" });
         }
     } catch (error) {
         console.log("Error in uploadVideo controller", error);
