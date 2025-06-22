@@ -139,8 +139,4 @@ With NoirSight, it’s a *standard.*
 
 We’re not just building a tool — we’re *building the future of trust* on the internet.
 
-Thank you.
-
----
-
-Would you like this as a *PowerPoint deck, **poster board, or a **demo video script* as well?
+Thank you
