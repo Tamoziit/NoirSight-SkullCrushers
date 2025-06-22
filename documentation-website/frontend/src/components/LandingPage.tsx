@@ -80,7 +80,7 @@ const LandingPage = () => {
               ]}
               typingSpeed={80}
               deletingSpeed={40}
-              pauseDuration={2500}
+              pauseDuration={5500}
             />
           </h1>
           <p className="text-gray-300 inter-font text-lg mt-4 max-w-2xl">
@@ -92,7 +92,8 @@ const LandingPage = () => {
       {/* Hero Section */}
       <div className="relative z-10 w-full min-h-screen flex flex-col items-center justify-center px-6 py-20">
         <div className="max-w-6xl mx-auto text-center">
-          <div className="mb-8 float-animation">
+          <div className="mb-8 float-animation flex flex-col items-center gap-3">
+            <img src="/hero.jpg" alt="hero" className='w-[380px] -mt-36' />
             <p className="md:text-xl max-w-3xl leading-relaxed inter-font text-lg font-light text-gray-300 mx-auto mb-8">
               Cutting-edge surveillance technology powered by AI. Monitor, analyze, and detect threats 
               with precision and stealth in real-time environments.
