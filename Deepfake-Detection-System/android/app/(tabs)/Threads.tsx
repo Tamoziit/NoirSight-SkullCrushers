@@ -21,26 +21,21 @@ const Threads = () => {
 			const data = await getThreads(pageNum);
 
 			if (isRefresh) {
-				// Reset feed for refresh
 				setFeed(data || []);
 				setPage(1);
 				setHasMoreData(data && data.length > 0);
 			} else {
 				if (pageNum === 1) {
-					// Initial load
 					setFeed(data || []);
 				} else {
-					// Pagination - append new data
 					if (data && data.length > 0) {
 						setFeed(prevFeed => [...prevFeed, ...data]);
 					} else {
-						// No more data available
 						setHasMoreData(false);
 					}
 				}
 			}
 
-			// Stop fetching if no data received and page > 1
 			if (pageNum > 1 && (!data || data.length === 0)) {
 				setHasMoreData(false);
 			}
@@ -54,7 +49,7 @@ const Threads = () => {
 
 	const onRefresh = useCallback(async () => {
 		setRefreshing(true);
-		setHasMoreData(true); // Reset pagination state
+		setHasMoreData(true);
 		await fetchMyThreads(1, true);
 		setRefreshing(false);
 	}, []);
