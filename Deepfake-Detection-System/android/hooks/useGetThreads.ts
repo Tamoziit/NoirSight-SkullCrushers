@@ -9,11 +9,11 @@ const useGetThreads = () => {
     const { authUser } = useAuthContext();
     const apiUrl = EXPO_API_URL;
 
-    const getThreads = async () => {
+    const getThreads = async (page: number) => {
         const token = await cleanUpToken();
         setLoading(true);
         try {
-            const res = await fetch(`${apiUrl}/threads/get-threads/${authUser?._id}`, {
+            const res = await fetch(`${apiUrl}/threads/get-threads/${authUser?._id}?page=${page}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
