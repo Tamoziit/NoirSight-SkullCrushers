@@ -9,11 +9,11 @@ const useGetFeed = () => {
     const { authUser } = useAuthContext();
     const apiUrl = EXPO_API_URL;
 
-    const getFeed = async () => {
+    const getFeed = async (page: number) => {
         const token = await cleanUpToken();
         setLoading(true);
         try {
-            const res = await fetch(`${apiUrl}/upload/feed/${authUser?._id}`, {
+            const res = await fetch(`${apiUrl}/upload/feed/${authUser?._id}?page=${page}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

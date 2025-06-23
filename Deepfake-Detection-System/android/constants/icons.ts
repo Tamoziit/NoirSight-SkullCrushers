@@ -13,6 +13,7 @@ import mobile from "@/assets/icons/mobile.png";
 import gender from "@/assets/icons/gender.png";
 import threads from "@/assets/icons/threads.png";
 import pen from "@/assets/icons/pen.png";
+import plus from "@/assets/icons/plus.png";
 
 export const icons = {
   home,
@@ -29,5 +30,6 @@ export const icons = {
   mobile,
   gender,
   threads,
-  pen
+  pen,
+  plus
 };
