@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
-import { Video, ResizeMode } from 'expo-av';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import timeAgo from '@/utils/timeAgo';
 import FeedbackModal from './FeedbackModal';
 import { PostProps } from '@/interfaces/interfaces';
 import { images } from '@/constants/images';
+import VideoComponent from './VideoComponent';
 
 const PostCard = ({ post: { _id, userId, type, url, modelResult, confidence, createdAt, positiveReviews, negativeReviews }, index }: PostProps) => {
 	const [modalVisible, setModalVisible] = useState(false);
@@ -24,14 +24,8 @@ const PostCard = ({ post: { _id, userId, type, url, modelResult, confidence, cre
 			</View>
 
 			{type === "video" ? (
-				<Video
-					source={{ uri: url }}
-					style={{ width: '100%', height: 240 }}
-					resizeMode={ResizeMode.COVER}
-					isLooping
-					shouldPlay
-					isMuted
-					useNativeControls={true}
+				<VideoComponent
+					url={url}
 				/>
 			) : (
 				<Image

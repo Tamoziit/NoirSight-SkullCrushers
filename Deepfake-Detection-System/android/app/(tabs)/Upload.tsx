@@ -1,16 +1,16 @@
 import { View, Text, TouchableOpacity, Alert, Image, ActivityIndicator } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import Header from '@/components/Header';
 import * as DocumentPicker from 'expo-document-picker';
-import { Video, ResizeMode } from 'expo-av';
 import { uploadVideoToCloudinary } from '@/utils/uploadVideoToCloudinary';
 import Toast from 'react-native-toast-message';
 import { uploadImageToCloudinary } from '@/utils/uploadImageToCloudinary';
 import useUploadPost from '@/hooks/useUploadPost';
 import { ModelResponse } from '@/interfaces/interfaces';
 import ModelResult from '@/components/ModelResult';
+import VideoComponent from '@/components/VideoComponent';
 
 const Upload = () => {
   const [fileType, setFileType] = useState<'image' | 'video'>('video');
@@ -150,14 +150,8 @@ const Upload = () => {
               <Text className="text-white mb-2">{media.name}</Text>
 
               {fileType === 'video' ? (
-                <Video
-                  source={{ uri: media.uri }}
-                  style={{ width: '100%', height: 240, borderRadius: 12 }}
-                  useNativeControls
-                  resizeMode={ResizeMode.COVER}
-                  isLooping
-                  isMuted
-                  shouldPlay
+                <VideoComponent
+                  url={media?.uri}
                 />
               ) : (
                 <Image

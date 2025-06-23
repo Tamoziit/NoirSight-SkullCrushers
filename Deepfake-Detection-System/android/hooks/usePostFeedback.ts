@@ -36,7 +36,7 @@ const usePostFeedback = () => {
             if (data) {
                 Toast.show({
                     type: 'success',
-                    text1: 'Post uploaded successfully!',
+                    text1: 'Feedback posted successfully!',
                     position: 'top',
                 });
             }
