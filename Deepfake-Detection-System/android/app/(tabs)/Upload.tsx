@@ -151,13 +151,13 @@ const Upload = () => {
 
               {fileType === 'video' ? (
                 <VideoComponent
-                  url={media?.uri}
+                  url={modelResponse?.url ? modelResponse.url : media?.uri}
                 />
               ) : (
                 <Image
-                  source={{ uri: media.uri }}
+                  source={{ uri: modelResponse?.url ? modelResponse.url : media?.uri }}
                   style={{ width: '100%', height: 240, borderRadius: 12 }}
-                  resizeMode="cover"
+                  resizeMode="contain"
                 />
               )}
             </View>

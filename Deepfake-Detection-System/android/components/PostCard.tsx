@@ -30,7 +30,8 @@ const PostCard = ({ post: { _id, userId, type, url, modelResult, confidence, cre
 			) : (
 				<Image
 					source={{ uri: url }}
-					style={{ width: '100%', height: 240 }}
+					style={{ width: '100%', height: 240, borderRadius: 12 }}
+					resizeMode="contain"
 				/>
 			)}
 
