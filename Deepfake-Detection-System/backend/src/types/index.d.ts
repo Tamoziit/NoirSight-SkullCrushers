@@ -58,3 +58,9 @@ export interface FeedbackProps {
 export interface ThreadProps {
     text: string;
 }
+
+export interface PostResponse {
+    label: "real" | "fake";
+    confidence: number;
+    annotedUrl: string;
+}

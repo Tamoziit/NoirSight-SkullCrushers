@@ -1,6 +1,7 @@
 import axios, { Axios } from "axios";
 import { ArticleResponse, PostResponse, WrapperError } from "./types";
 import refineConfidence from "./utils/refineConfidence";
+import generateImageAnnotation from "./utils/generateImageAnnotation";
 
 export class NoirSight {
     public apiKey: string;
@@ -30,8 +31,12 @@ export class DeepfakeVideoAnalyser extends NoirSight {
                 url: this.url
             });
             const result = refineConfidence({ ...response.data });
+            const annotedUrl = generateImageAnnotation(this.url, result.label);
 
-            return result;
+            return {
+                ...result,
+                annotedUrl,
+            };
         } catch (error: unknown) {
             if (axios.isAxiosError(error)) {
                 if (error.response) {
@@ -76,8 +81,12 @@ export class DeepfakeImageAnalyser extends NoirSight {
                 url: this.url
             });
             const result = refineConfidence({ ...response.data });
+            const annotedUrl = generateImageAnnotation(this.url, result.label);
 
-            return result;
+            return {
+                ...result,
+                annotedUrl,
+            };
         } catch (error: unknown) {
             if (axios.isAxiosError(error)) {
                 if (error.response) {

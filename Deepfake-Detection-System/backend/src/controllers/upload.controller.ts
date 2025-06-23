@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import User from "../models/user.model";
 import Upload from "../models/uploads.model";
-import { FeedbackProps, UploadProps } from "../types";
+import { FeedbackProps, PostResponse, UploadProps } from "../types";
 import { DeepfakeImageAnalyser, DeepfakeVideoAnalyser } from "noirsight";
 
 const apiKey = process.env.NOIR_SIGHT_API_KEY!;
@@ -25,16 +25,16 @@ export const upload = async (req: Request, res: Response) => {
         let response;
         if (type === "video") {
             const videoAnalyser = new DeepfakeVideoAnalyser(apiKey, url);
-            response = await videoAnalyser.analyseVideo();
+            response = await videoAnalyser.analyseVideo() as PostResponse;
         } else {
             const imageAnalyser = new DeepfakeImageAnalyser(apiKey, url);
-            response = await imageAnalyser.analyseImage();
+            response = await imageAnalyser.analyseImage() as PostResponse;
         }
 
         const newPost = new Upload({
             userId: id,
             type,
-            url,
+            url: response.annotedUrl,
             modelResult: response.label,
             confidence: response.confidence * 100
         });

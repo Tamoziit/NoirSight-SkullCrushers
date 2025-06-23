@@ -34,7 +34,7 @@ const VideoComponent = ({ url }: MediaProps) => {
 			<VideoView
 				player={player}
 				style={{ width: '100%', height: 240 }}
-				contentFit="cover"
+				contentFit="contain"
 				showsTimecodes={true}
 				allowsFullscreen={true}
 				allowsPictureInPicture={true}
