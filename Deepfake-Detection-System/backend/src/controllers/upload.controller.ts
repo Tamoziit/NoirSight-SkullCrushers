@@ -1,10 +1,11 @@
 import { Request, Response } from "express";
 import User from "../models/user.model";
 import Upload from "../models/uploads.model";
-import { FeedbackProps, PostResponse, UploadProps } from "../types";
+import { FeedbackProps, UploadProps } from "../types";
 import { DeepfakeImageAnalyser, DeepfakeVideoAnalyser } from "noirsight";
 
 const apiKey = process.env.NOIR_SIGHT_API_KEY!;
+const userId = process.env.NOIR_SIGHT_USER_ID!;
 
 export const upload = async (req: Request, res: Response) => {
     try {
@@ -21,14 +22,26 @@ export const upload = async (req: Request, res: Response) => {
             res.status(400).json({ error: "Cannot find User" });
             return;
         }
+        if (!url || !type) {
+            res.status(400).json({ error: "Both 'url' and 'type' are required" });
+            return;
+        }
 
         let response;
         if (type === "video") {
-            const videoAnalyser = new DeepfakeVideoAnalyser(apiKey, url);
-            response = await videoAnalyser.analyseVideo() as PostResponse;
+            const videoAnalyser = new DeepfakeVideoAnalyser(apiKey, userId);
+            response = await videoAnalyser.analyseVideo(url);
         } else {
-            const imageAnalyser = new DeepfakeImageAnalyser(apiKey, url);
-            response = await imageAnalyser.analyseImage() as PostResponse;
+            const imageAnalyser = new DeepfakeImageAnalyser(apiKey, userId);
+            response = await imageAnalyser.analyseImage(url);
+        }
+
+
+        if (response?.error) {
+            res.status(400).json({
+                error: response.detail || "Unexpected error occurred from analyser",
+            });
+            return;
         }
 
         const newPost = new Upload({
@@ -53,7 +66,7 @@ export const upload = async (req: Request, res: Response) => {
             res.status(400).json({ error: "Couldn't Upload Post" });
         }
     } catch (error) {
-        console.log("Error in uploadVideo controller", error);
+        console.log("Error in Upload controller", error);
         res.status(500).json({ error: "Internal Server Error" });
     }
 }

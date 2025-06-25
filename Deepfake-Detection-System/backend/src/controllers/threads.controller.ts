@@ -5,6 +5,7 @@ import { ThreadProps } from "../types";
 import { ArticleAnalyser } from "noirsight";
 
 const apiKey = process.env.NOIR_SIGHT_API_KEY!;
+const userId = process.env.NOIR_SIGHT_USER_ID!;
 
 export const uploadThread = async (req: Request, res: Response) => {
     try {
@@ -106,8 +107,15 @@ export const analyseThread = async (req: Request, res: Response) => {
             return;
         }
 
-        const articleAnalyzer = new ArticleAnalyser(apiKey);
+        const articleAnalyzer = new ArticleAnalyser(apiKey, userId);
         const response = await articleAnalyzer.analyseArticle(text);
+
+        if (response?.error) {
+            res.status(400).json({
+                error: response.detail || "Unexpected error occurred from analyser",
+            });
+            return;
+        }
 
         res.status(200).json(response);
     } catch (error) {
