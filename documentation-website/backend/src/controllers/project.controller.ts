@@ -1,0 +1,63 @@
+import { Request, Response } from "express";
+import { CompanyProps, ProjectBody, ProjectProps } from "../types";
+import Company from "../models/companies.model";
+import { addMonths } from "date-fns";
+import generateApiKey from "../utils/generateApiKey";
+
+export const createProject = async (req: Request, res: Response) => {
+	try {
+		const {
+			company,
+			projectName,
+			email
+		}: ProjectBody = req.body;
+
+		if (projectName.length < 2) {
+			res.status(400).json({ error: "Name should be at least 2 characters long" });
+			return;
+		}
+
+		const existingCompanyDoc = await Company.findOne({ email });
+		const isDuplicate = (doc: CompanyProps) =>
+			doc.projects.some(
+				(proj) =>
+					proj.company === company &&
+					proj.projectName === projectName
+			);
+
+		if (existingCompanyDoc && isDuplicate(existingCompanyDoc)) {
+			res.status(400).json({
+				error: "A project with the same name and company already exists for this user."
+			});
+			return;
+		}
+
+		const apiKey = generateApiKey(company, projectName);
+		const validity = addMonths(new Date(), 3); // 3 months from now
+
+		const newProject = {
+			company,
+			projectName,
+			apiKey,
+			validity
+		};
+
+		if (existingCompanyDoc) {
+			existingCompanyDoc.projects.push(newProject);
+			await existingCompanyDoc.save();
+		} else {
+			const newCompany = new Company({
+				email,
+				projects: [newProject]
+			});
+			await newCompany.save();
+		}
+
+		if (newProject) {
+			res.status(201).json(newProject);
+		}
+	} catch (error) {
+		console.log("Error in generateApiKey controller", error);
+		res.status(500).json({ error: "Internal Server Error" });
+	}
+}
