@@ -42,19 +42,25 @@ export const createProject = async (req: Request, res: Response) => {
 			validity
 		};
 
+		let userId;
 		if (existingCompanyDoc) {
 			existingCompanyDoc.projects.push(newProject);
 			await existingCompanyDoc.save();
+			userId = existingCompanyDoc?._id;
 		} else {
 			const newCompany = new Company({
 				email,
 				projects: [newProject]
 			});
 			await newCompany.save();
+			userId = newCompany?._id;
 		}
 
 		if (newProject) {
-			res.status(201).json(newProject);
+			res.status(201).json({
+				...newProject,
+				userId,
+			});
 		}
 	} catch (error) {
 		console.log("Error in generateApiKey controller", error);

@@ -4,12 +4,16 @@ export const uploadBlobToCloudinary = async (
   fileUrl: string,
   type: "image" | "video"
 ): Promise<string | null> => {
+  const CLOUDINARY_IMAGE_URL = import.meta.env.VITE_CLOUDINARY_IMAGE_URL;
+  const CLOUDINARY_VIDEO_URL = import.meta.env.VITE_CLOUDINARY_VIDEO_URL;
+  const CLOUDINARY_PRESET = import.meta.env.VITE_CLOUDINARY_PRESET;
+
   const cloudinaryUrl =
     type === "image"
-      ? "https://api.cloudinary.com/v1_1/dhjyjsyvt/image/upload"
-      : "https://api.cloudinary.com/v1_1/dhjyjsyvt/video/upload";
+      ? CLOUDINARY_IMAGE_URL
+      : CLOUDINARY_VIDEO_URL;
 
-  const uploadPreset = "NoirSight";
+  const uploadPreset = CLOUDINARY_PRESET;
   const formData = new FormData();
   formData.append("upload_preset", uploadPreset);
 
