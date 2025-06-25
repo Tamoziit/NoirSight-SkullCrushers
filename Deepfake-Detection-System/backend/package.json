@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "Node, Express, MongoDB, JWT authorization backend template",
+  "description": "Noir Media Simulation Backend",
   "main": "src/server.ts",
   "scripts": {
     "dev": "nodemon src/server.ts",
