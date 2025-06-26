@@ -1,4 +1,4 @@
-import { ProjectProps } from "@/types";
+import { ProjectCreationProps } from "@/types";
 import { useUser } from "@civic/auth/react";
 import { useState } from "react"
 import toast from "react-hot-toast";
@@ -8,7 +8,7 @@ const useCreateProject = () => {
     const { user } = useUser()
     const apiUrl = import.meta.env.VITE_API_URL;
 
-    const createProject = async ({ company, projectName }: ProjectProps) => {
+    const createProject = async ({ company, projectName }: ProjectCreationProps) => {
         const success = handleInputErrors({ company, projectName });
 
         if (!success) return;
@@ -54,7 +54,7 @@ const useCreateProject = () => {
 export default useCreateProject;
 
 
-function handleInputErrors({ company, projectName }: ProjectProps) {
+function handleInputErrors({ company, projectName }: ProjectCreationProps) {
     if (!company || !projectName) {
         toast.error("Please fill all the fields");
         return false;

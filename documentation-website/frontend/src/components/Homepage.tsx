@@ -2,7 +2,6 @@ import ThreeBackground from './ThreeBackground';
 import { Link } from 'react-router-dom';
 import { UserButton } from '@civic/auth-web3/react';
 
-
 const Homepage = () => {
   return (
     <div className="min-h-screen bg-black">
@@ -31,6 +30,12 @@ const Homepage = () => {
             >
               Playground
             </Link>
+            <Link
+              to="/dashboard"
+              className="text-sm text-gray-300 hover:text-white transition-colors inter-font"
+            >
+              Dashboard
+            </Link>
           </div>
 
           {/* Right: User Button */}
@@ -39,8 +44,6 @@ const Homepage = () => {
           </div>
         </div>
       </nav>
-
-
 
       <div className="relative z-10 divider"></div>
 
@@ -71,7 +74,6 @@ const Homepage = () => {
               Create API Key
             </Link>
           </div>
-
 
           <div className="mb-16"></div>
 
@@ -133,7 +135,7 @@ const Homepage = () => {
               </div>
               <h3 className="text-lg font-medium text-white mb-2 geist-font">Detection Playground</h3>
               <p className="text-gray-300 text-sm inter-font mb-4">
-                A sandbox to test your own images, videos, or links and see if they’re real or AI-generated—live and modular.
+                A sandbox to test your own images, videos, or links and see if they're real or AI-generated—live and modular.
               </p>
               <div className="flex flex-wrap gap-2">
                 <span className="skill-badge px-2 py-1 rounded text-xs text-gray-300">React</span>
@@ -141,12 +143,9 @@ const Homepage = () => {
                 <span className="skill-badge px-2 py-1 rounded text-xs text-gray-300">API Integration</span>
               </div>
             </div>
-
           </div>
 
-
           <div className="divider mb-16"></div>
-
 
           <div className="flex flex-col sm:flex-row justify-center items-center gap-8 text-center">
             <div>
@@ -166,6 +165,7 @@ const Homepage = () => {
           </div>
         </div>
 
+        <div className="divider mb-16"></div>
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-gray-400">
         </div>
       </div>

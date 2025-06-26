@@ -21,8 +21,6 @@ const ApiKeyPage = () => {
     }
   }
 
-  console.log(apiData);
-
   return (
     <div className="min-h-screen bg-black text-white">
       <ThreeBackground />
@@ -33,7 +31,7 @@ const ApiKeyPage = () => {
             <img src="/eye.png" alt="Logo" className="w-6 h-6" />
             <span className="geist-font text-xl font-bold text-white">Noir Sight</span>
           </div>
-          <Link to="/" className="enhanced-primary-button px-4 py-2 rounded-md text-white text-sm">
+          <Link to="/home" className="enhanced-primary-button px-4 py-2 rounded-md text-white text-sm">
             ← Back to Home
           </Link>
         </div>

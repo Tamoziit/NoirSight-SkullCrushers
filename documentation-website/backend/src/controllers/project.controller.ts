@@ -67,3 +67,25 @@ export const createProject = async (req: Request, res: Response) => {
 		res.status(500).json({ error: "Internal Server Error" });
 	}
 }
+
+export const getProjects = async (req: Request, res: Response) => {
+	try {
+		const email = req.params.email;
+		const user = await Company.findOne({ email });
+		if (!user) {
+			res.status(400).json({ error: "Cannot find User" });
+			return;
+		}
+
+		if (Array.isArray(user.projects)) {
+			user.projects.sort((a, b) => {
+				return new Date(b.validity).getTime() - new Date(a.validity).getTime();
+			});
+		} // most recent projects first
+
+		res.status(200).json(user);
+	} catch (error) {
+		console.log("Error in getProjects controller", error);
+		res.status(500).json({ error: "Internal Server Error" });
+	}
+}
