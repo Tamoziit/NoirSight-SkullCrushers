@@ -1,8 +1,8 @@
-import ThreeBackground from './ThreeBackground';
+import ThreeBackground from '../../components/ThreeBackground';
 import { Link } from 'react-router-dom';
 import { UserButton } from '@civic/auth-web3/react';
 
-const Homepage = () => {
+const Home = () => {
   return (
     <div className="min-h-screen bg-black">
       <ThreeBackground />
@@ -173,4 +173,4 @@ const Homepage = () => {
   );
 };
 
-export default Homepage;
+export default Home;

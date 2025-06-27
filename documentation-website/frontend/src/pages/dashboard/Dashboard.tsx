@@ -1,9 +1,9 @@
 import { ProjectProps } from "@/types";
-import ApiKeyCard from "./ApiKeyCard";
+import ApiKeyCard from "../../components/ApiKeyCard";
 import { useUser } from "@civic/auth/react";
 import { useEffect, useState } from "react";
 import useGetProjects from "@/hooks/useGetMyProjects";
-import ThreeBackground from "./ThreeBackground";
+import ThreeBackground from "../../components/ThreeBackground";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 

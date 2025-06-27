@@ -1,16 +1,14 @@
-
+import LoginOverlay from '@/components/LoginOverlay';
+import SignupOverlay from '@/components/SignupOverlay';
+import ThreeBackground from '@/components/ThreeBackground';
+import ThreeSpyModel from '@/components/ThreeSpyModel';
+import TypingEffect from '@/components/TypingEffect';
+import { UserButton } from '@civic/auth/react';
+import { AlertTriangle, Eye, Search, Shield } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ThreeSpyModel from './ThreeSpyModel';
-import TypingEffect from './TypingEffect';
-import LoginOverlay from './LoginOverlay';
-import SignupOverlay from './SignupOverlay';
-import { Eye, Shield, Search, AlertTriangle } from 'lucide-react';
-import ThreeBackground from './ThreeBackground';
-import { UserButton } from '@civic/auth/react';
-// import { useCivicAuth } from '@civic/auth-web3/react';
 
-const LandingPage = () => {
+const Landing = () => {
   const [showLogin, setShowLogin] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
   const navigate = useNavigate();
@@ -28,7 +26,7 @@ const LandingPage = () => {
     <div className="min-h-screen bg-black">
       <ThreeBackground />
       <ThreeSpyModel />
-      
+
       {/* Navigation */}
       <nav className="relative z-10 w-full px-6 py-4">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
@@ -38,20 +36,20 @@ const LandingPage = () => {
           </div>
 
           <div className="hidden md:flex items-center space-x-8">
-            <button 
-              onClick={() => scrollToSection('about')} 
+            <button
+              onClick={() => scrollToSection('about')}
               className="text-gray-300 hover:text-white transition-colors inter-font text-sm"
             >
               About
             </button>
-            <button 
-              onClick={() => scrollToSection('services')} 
+            <button
+              onClick={() => scrollToSection('services')}
               className="text-gray-300 hover:text-white transition-colors inter-font text-sm"
             >
               Services
             </button>
-            <button 
-              onClick={() => scrollToSection('contact')} 
+            <button
+              onClick={() => scrollToSection('contact')}
               className="text-gray-300 hover:text-white transition-colors inter-font text-sm"
             >
               Contact
@@ -59,7 +57,7 @@ const LandingPage = () => {
           </div>
           <div className="flex items-center space-x-4">
             <UserButton />
-          </div>          
+          </div>
         </div>
       </nav>
 
@@ -95,13 +93,13 @@ const LandingPage = () => {
           <div className="mb-8 float-animation flex flex-col items-center gap-3">
             <img src="/hero.jpg" alt="hero" className='w-[380px] -mt-36' />
             <p className="md:text-xl max-w-3xl leading-relaxed inter-font text-lg font-light text-gray-300 mx-auto mb-8">
-              Cutting-edge surveillance technology powered by AI. Monitor, analyze, and detect threats 
+              Cutting-edge surveillance technology powered by AI. Monitor, analyze, and detect threats
               with precision and stealth in real-time environments.
             </p>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-            <button 
+            <button
               onClick={() => scrollToSection('about')}
               className="enhanced-primary-button px-6 py-3 text-white rounded-lg font-medium text-sm min-w-40 inter-font"
             >
@@ -155,7 +153,6 @@ const LandingPage = () => {
                 Noir Sight combines computer vision, natural language models, and search intelligence in a single modular system.
               </p>
             </div>
-
           </div>
         </div>
       </section>
@@ -242,7 +239,7 @@ const LandingPage = () => {
           <p className="text-gray-300 inter-font text-lg mb-12">
             Ready to enhance your security? Contact our team of experts today.
           </p>
-          
+
           <div className="glass-card rounded-2xl p-8 max-w-2xl mx-auto">
             <form className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -301,4 +298,4 @@ const LandingPage = () => {
   );
 };
 
-export default LandingPage;
+export default Landing;
