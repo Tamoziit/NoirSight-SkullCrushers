@@ -1,30 +1,18 @@
-import { ProjectCreationProps } from "@/types";
-import { useUser } from "@civic/auth/react";
 import { useState } from "react"
 import toast from "react-hot-toast";
 
 const useCreateProject = () => {
     const [loading, setLoading] = useState(false);
-    const { user } = useUser()
     const apiUrl = import.meta.env.VITE_API_URL;
 
-    const createProject = async ({ company, projectName }: ProjectCreationProps) => {
-        const success = handleInputErrors({ company, projectName });
-
-        if (!success) return;
-
+    const createProject = async (sessionId: string) => {
         setLoading(true);
         try {
-            const res = await fetch(`${apiUrl}/project/create-project`, {
+            const res = await fetch(`${apiUrl}/project/create-project/${sessionId}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    company,
-                    projectName,
-                    email: user.email
-                })
+                }
             });
             const data = await res.json();
 
@@ -52,18 +40,3 @@ const useCreateProject = () => {
 }
 
 export default useCreateProject;
-
-
-function handleInputErrors({ company, projectName }: ProjectCreationProps) {
-    if (!company || !projectName) {
-        toast.error("Please fill all the fields");
-        return false;
-    }
-
-    if (projectName.length < 2) {
-        toast.error("Project Name should be atleast 2 characters long");
-        return false;
-    }
-
-    return true;
-}

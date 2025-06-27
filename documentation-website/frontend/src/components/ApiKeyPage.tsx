@@ -1,23 +1,25 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import ThreeBackground from "../components/ThreeBackground";
-import useCreateProject from "@/hooks/useCreateProject";
-import ApiKeyCard from "./ApiKeyCard";
-import { ApiKeyData } from "@/types";
+import usePaymentHandler from "@/hooks/usePaymentHandler";
+import toast from "react-hot-toast";
 
 const ApiKeyPage = () => {
   const [inputs, setInputs] = useState({
     company: "",
     projectName: ""
   });
-  const [apiData, setApiData] = useState<ApiKeyData | null>(null);
-  const { loading, createProject } = useCreateProject();
+  const { loading, payment } = usePaymentHandler();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = await createProject(inputs);
-    if (data) {
-      setApiData(data);
+    const res = await payment(inputs);
+
+    if (res.url) {
+      window.location.href = res.url;
+    }
+    else {
+      toast.error("Error in Initiating Payment. Try Again Later");
     }
   }
 
@@ -77,13 +79,9 @@ const ApiKeyPage = () => {
             {loading ? "Generating..." : "🔑 Generate API Key"}
           </button>
         </form>
-
-        {apiData && (
-          <ApiKeyCard {...apiData} />
-        )}
       </div>
     </div>
   )
 }
 
-export default ApiKeyPage
+export default ApiKeyPage;

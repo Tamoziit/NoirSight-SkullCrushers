@@ -8,8 +8,10 @@ import helmet from "helmet";
 import morgan from "morgan";
 
 import connecToMongoDB from './db/connectToMongoDB';
+import stripe from './services/stripeInit';
 import adminRoutes from './routes/admin.routes';
 import projectRoutes from './routes/project.routes';
+import paymentRoutes from "./routes/payment.routes";
 
 const PORT = process.env.PORT || 3000;
 
@@ -48,8 +50,15 @@ app.get('/api/v1', (req: Request, res: Response) => {
 
 app.use('/api/v1/admin', adminRoutes);
 app.use('/api/v1/project', projectRoutes);
+app.use('/api/v1/payments', paymentRoutes);
 
 app.listen(PORT, () => {
     console.log(`🚀 Server is running on PORT: ${PORT}`);
     connecToMongoDB();
+
+    if (stripe) {
+        console.log("💵 Stripe Initialized");
+    } else {
+        console.log("❌ Error in Initializing Stripe");
+    }
 });
