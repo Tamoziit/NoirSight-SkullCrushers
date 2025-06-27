@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Copy } from 'lucide-react';
 import { Card } from '@/components/ui/card';
-import ThreeBackground from './ThreeBackground';
-import DocumentationNav from './DocumentationNav';
+import ThreeBackground from '../../components/ThreeBackground';
+import DocumentationNav from '../../components/DocumentationNav';
 
 const Documentation = () => {
 	const [copied, setCopied] = useState<string | null>(null);
@@ -17,6 +17,7 @@ const Documentation = () => {
 	return (
 		<>
 			<DocumentationNav />
+			
 			<div className="relative min-h-screen bg-black text-white px-6 py-12 overflow-hidden">
 				<div className="absolute inset-0 z-0">
 					<ThreeBackground />
@@ -288,7 +289,7 @@ console.log(response);`,
 								<div className="md:w-2/3">
 									<h3 className="text-xl font-semibold gradient-text mb-2">Step 2: Scan Article</h3>
 									<p className="text-gray-300 inter-font">
-										While reading an article, click the extension icon. 
+										While reading an article, click the extension icon.
 									</p>
 								</div>
 								<div className="md:w-1/3">
@@ -307,7 +308,7 @@ console.log(response);`,
 								<div className="md:w-2/3">
 									<h3 className="text-xl font-semibold gradient-text mb-2">Step 3: See Statistics</h3>
 									<p className="text-gray-300 inter-font">
-										You'll instantly see AI-verified credibility scores right below the headline. 
+										You'll instantly see AI-verified credibility scores right below the headline.
 									</p>
 								</div>
 								<div className="md:w-1/3">

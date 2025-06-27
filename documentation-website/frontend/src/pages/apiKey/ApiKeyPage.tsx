@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import ThreeBackground from "../components/ThreeBackground";
+import ThreeBackground from "../../components/ThreeBackground";
 import usePaymentHandler from "@/hooks/usePaymentHandler";
 import toast from "react-hot-toast";
 
