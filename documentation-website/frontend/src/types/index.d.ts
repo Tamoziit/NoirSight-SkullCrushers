@@ -1,3 +1,8 @@
+export interface PaymentProps {
+  company: string;
+  projectName: string;
+}
+
 export interface ProjectCreationProps {
   company: string;
   projectName: string;

@@ -5,12 +5,6 @@ export interface AdminToken {
     password: string
 }
 
-export interface ProjectBody {
-    company: string;
-    projectName: string;
-    email: string;
-}
-
 export interface ProjectProps {
     _id: Types.ObjectId;
     company: string;

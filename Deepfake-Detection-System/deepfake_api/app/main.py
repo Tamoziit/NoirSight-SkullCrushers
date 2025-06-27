@@ -10,14 +10,13 @@ logger = logging.getLogger(__name__)
 
 app = FastAPI(title="Deepfake Detection API", version="1.0.0")
 
+app.add_middleware(APIKeyAuthMiddleware)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-app.add_middleware(APIKeyAuthMiddleware)
 
 app.include_router(detect.router, prefix="/api", tags=["detection"])
 app.include_router(analyze.router, prefix="/api", tags=["analysis"])

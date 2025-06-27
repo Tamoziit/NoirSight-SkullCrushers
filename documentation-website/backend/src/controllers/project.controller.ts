@@ -1,17 +1,27 @@
 import { Request, Response } from "express";
-import { CompanyProps, ProjectBody, ProjectProps } from "../types";
+import { CompanyProps } from "../types";
 import Company from "../models/companies.model";
 import { addMonths } from "date-fns";
 import generateApiKey from "../utils/generateApiKey";
+import stripe from "../services/stripeInit";
 
 export const createProject = async (req: Request, res: Response) => {
 	try {
-		const {
-			company,
-			projectName,
-			email
-		}: ProjectBody = req.body;
+		const sessionId = req.params.sessionId;
+		const session = await stripe.checkout.sessions.retrieve(sessionId);
 
+		if (session.mode !== "subscription" || !session.subscription) {
+			res.status(400).json({ error: "Subscription not active" });
+			return;
+		}
+		const subscription = await stripe.subscriptions.retrieve(session.subscription as string);
+
+		if (subscription.status !== "active") {
+			res.status(400).json({ error: "Subscription not active" });
+			return;
+		}
+
+		const { email, company, projectName } = session.metadata!;
 		if (projectName.length < 2) {
 			res.status(400).json({ error: "Name should be at least 2 characters long" });
 			return;
