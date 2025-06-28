@@ -21,6 +21,36 @@ const Landing = () => {
   const handleGetStarted = () => {
     navigate('/home');
   };
+  
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("Form submitted:", formData);
+    alert("Message sent successfully!");
+    setFormData({
+      name: '',
+      email: '',
+      subject: '',
+      message: ''
+    });
+  };
+
+
+
 
   return (
     <div className="min-h-screen bg-black">
@@ -241,7 +271,7 @@ const Landing = () => {
           </p>
 
           <div className="glass-card rounded-2xl p-8 max-w-2xl mx-auto">
-            <form className="space-y-6">
+            {/* <form className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <input
                   type="text"
@@ -267,6 +297,63 @@ const Landing = () => {
               <button
                 type="submit"
                 className="enhanced-primary-button w-full px-6 py-3 text-white rounded-lg font-medium text-sm inter-font"
+              >
+                Send Message
+              </button>
+            </form> */}
+            <form
+              className="glass-card rounded-xl p-8 space-y-6 relative z-50"
+              onSubmit={handleSubmit}
+              style={{ pointerEvents: "auto" }}
+            >
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  placeholder="Your Name"
+                  className="w-full relative z-50 px-4 py-3 rounded-lg bg-black/40 border border-white/20 text-white placeholder-gray-400 inter-font text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  style={{ pointerEvents: "auto" }}
+                  autoComplete="off"
+                />
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="Your Email"
+                  className="w-full relative z-50 px-4 py-3 rounded-lg bg-black/40 border border-white/20 text-white placeholder-gray-400 inter-font text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  style={{ pointerEvents: "auto" }}
+                  autoComplete="off"
+                />
+              </div>
+
+              <input
+                type="text"
+                name="subject"
+                value={formData.subject}
+                onChange={handleChange}
+                placeholder="Subject"
+                className="w-full relative z-50 px-4 py-3 rounded-lg bg-black/40 border border-white/20 text-white placeholder-gray-400 inter-font text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                style={{ pointerEvents: "auto" }}
+                autoComplete="off"
+              />
+
+              <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                rows={4}
+                placeholder="Your Message"
+                className="w-full relative z-50 px-4 py-3 rounded-lg bg-black/40 border border-white/20 text-white placeholder-gray-400 inter-font text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                style={{ pointerEvents: "auto" }}
+              ></textarea>
+
+              <button
+                type="submit"
+                className="enhanced-primary-button w-full px-6 py-3 text-white rounded-lg font-medium text-sm relative z-50"
+                style={{ pointerEvents: "auto" }}
               >
                 Send Message
               </button>
