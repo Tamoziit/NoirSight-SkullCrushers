@@ -1,7 +1,6 @@
 import LoginOverlay from '@/components/LoginOverlay';
 import SignupOverlay from '@/components/SignupOverlay';
 import ThreeBackground from '@/components/ThreeBackground';
-import ThreeSpyModel from '@/components/ThreeSpyModel';
 import TypingEffect from '@/components/TypingEffect';
 import { UserButton } from '@civic/auth/react';
 import { AlertTriangle, Eye, Search, Shield } from 'lucide-react';
@@ -55,7 +54,7 @@ const Landing = () => {
   return (
     <div className="min-h-screen bg-black">
       <ThreeBackground />
-      <ThreeSpyModel />
+      
 
       {/* Navigation */}
       <nav className="relative z-10 w-full px-6 py-4">
@@ -118,8 +117,8 @@ const Landing = () => {
       </div>
 
       {/* Hero Section */}
-      <div className="relative z-10 w-full min-h-screen flex flex-col items-center justify-center px-6 py-20">
-        <div className="max-w-6xl mx-auto text-center">
+      <div className="relative z-10 w-full flex flex-col items-center justify-center px-6 py-24">
+        <div className="max-w-6xl mx-auto text-center py-28">
           <div className="mb-8 float-animation flex flex-col items-center gap-3">
             <img src="/hero.jpg" alt="hero" className='w-[380px] -mt-36' />
             <p className="md:text-xl max-w-3xl leading-relaxed inter-font text-lg font-light text-gray-300 mx-auto mb-8">
@@ -271,36 +270,7 @@ const Landing = () => {
           </p>
 
           <div className="glass-card rounded-2xl p-8 max-w-2xl mx-auto">
-            {/* <form className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <input
-                  type="text"
-                  placeholder="Your Name"
-                  className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-white/40 inter-font"
-                />
-                <input
-                  type="email"
-                  placeholder="Your Email"
-                  className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-white/40 inter-font"
-                />
-              </div>
-              <input
-                type="text"
-                placeholder="Subject"
-                className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-white/40 inter-font"
-              />
-              <textarea
-                rows={4}
-                placeholder="Your Message"
-                className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-white/40 resize-none inter-font"
-              ></textarea>
-              <button
-                type="submit"
-                className="enhanced-primary-button w-full px-6 py-3 text-white rounded-lg font-medium text-sm inter-font"
-              >
-                Send Message
-              </button>
-            </form> */}
+            
             <form
               className="glass-card rounded-xl p-8 space-y-6 relative z-50"
               onSubmit={handleSubmit}
