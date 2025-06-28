@@ -4,7 +4,8 @@ import TypingText from "./TypingText";
 import { UserButton } from "@civic/auth-web3/react";
 import { uploadBlobToCloudinary } from "@/utils/uploadToCloudinary";
 import { ArticleAnalyser, DeepfakeImageAnalyser, DeepfakeVideoAnalyser } from "noirsight";
-
+import { Listbox } from "@headlessui/react";
+import { ChevronDown } from "lucide-react";
 // Types
 interface Thread {
   user: {
@@ -232,56 +233,67 @@ const Playground = () => {
           ? "absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
           : "fixed bottom-4 left-0 right-0"
       }`}>
-        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-4">
-          {/* Utility Selector */}
-          <div className="relative w-full sm:w-auto">
-            <select
-              value={selectedUtility}
-              onChange={(e) => setSelectedUtility(e.target.value as UtilityType)}
-              className="glass-card bg-black/40 text-white border border-white/20 px-4 py-2 rounded-md text-sm appearance-none w-full pr-10"
-            >
-              {utilityOptions.map(option => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-            <div className="pointer-events-none absolute right-4 top-1/2 transform -translate-y-1/2 text-white">
-              ▼
-            </div>
-          </div>
+        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
+        {/* Utility Selector */}
+        <div className="relative w-full sm:w-auto flex-none min-w-[200px]"> 
+        {/* ✅ min-w ensures it stays consistent size like input/button */}
+        <Listbox value={selectedUtility} onChange={setSelectedUtility}>
+          <div className="relative">
+            <Listbox.Button className="text-white enhanced-primary-button w-full flex justify-between items-center px-3 py-2 rounded-md text-sm">
+              {/* ✅ text-sm consistent with input field text size */}
+              <span className="truncate">{utilityOptions.find(opt => opt.value === selectedUtility)?.label}</span>
+              <ChevronDown className="w-4 h-4 text-white ml-1" />
+            </Listbox.Button>
 
-          {/* Input Based on Selected Utility */}
-          {selectedUtility === "Article" ? (
-            <div className="flex w-full">
-              <input
-                type="text"
-                className="flex-1 px-4 py-2 rounded-l-md inter-font bg-black/50 text-white border border-white/20"
-                placeholder="Paste article URL..."
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                onKeyPress={(e) => e.key === "Enter" && handleSubmit()}
-              />
-              <button 
-                onClick={handleSubmit} 
-                className="enhanced-primary-button px-4 rounded-r-md"
-                disabled={!inputValue.trim()}
-              >
-                📨
-              </button>
-            </div>
-          ) : (
-            <label className="enhanced-primary-button px-6 py-2 text-white rounded-lg cursor-pointer mx-auto">
-              Upload {selectedUtility}
-              <input
-                type="file"
-                accept={selectedUtility === "Image" ? "image/*" : "video/*"}
-                className="hidden"
-                onChange={handleFileUpload}
-              />
-            </label>
-          )}
-        </div>
+            <Listbox.Options className="absolute bottom-full mb-1 w-full rounded-md bg-black/80 border border-white/20 shadow-lg z-50 backdrop-blur-lg">
+              {utilityOptions.map(option => (
+                <Listbox.Option
+                  key={option.value}
+                  value={option.value as UtilityType}
+                  className={({ active }) =>
+                    `px-3 py-2 cursor-pointer text-sm ${
+                      active ? 'bg-white/10 text-white' : 'text-white'
+                    }`
+                  }
+                >
+                  {option.label}
+                </Listbox.Option>
+              ))}
+            </Listbox.Options>
+          </div>
+        </Listbox>
+      </div>
+      {/* Input Based on Selected Utility */}
+        {selectedUtility === "Article" ? (
+          <div className="flex w-full sm:flex-1">
+            <input
+              type="text"
+              className="flex-1 px-4 py-2 rounded-l-md inter-font bg-black/50 text-white border border-white/20 backdrop-blur-lg"
+              placeholder="Paste article URL..."
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              onKeyPress={(e) => e.key === "Enter" && handleSubmit()}
+            />
+            <button 
+              onClick={handleSubmit} 
+              className="enhanced-primary-button px-4 rounded-r-md"
+              disabled={!inputValue.trim()}
+            >
+              📨
+            </button>
+          </div>
+        ) : (
+          <label className="enhanced-primary-button w-full sm:w-auto px-6 py-2 text-white rounded-lg cursor-pointer text-center">
+            Upload {selectedUtility}
+            <input
+              type="file"
+              accept={selectedUtility === "Image" ? "image/*" : "video/*"}
+              className="hidden"
+              onChange={handleFileUpload}
+            />
+          </label>
+        )}
+      </div>
       </div>
     </div>
   );
