@@ -13,6 +13,7 @@
   "dependencies": {
     "@civic/auth": "^0.8.1",
     "@civic/auth-web3": "^0.6.0",
+    "@headlessui/react": "^2.2.4",
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-accordion": "^1.2.0",
     "@radix-ui/react-alert-dialog": "^1.1.1",
