@@ -18,10 +18,10 @@ const DocumentationNav = () => {
         </button>
 
         {/* Center: Logo */}
-        <div className="flex items-center space-x-3">
+        <Link to="/" className="flex items-center space-x-3 cursor-pointer">
           <img src="/eye.png" alt="Noir Sight Logo" className="w-6 h-6" />
           <span className="geist-font text-xl font-bold text-white">Noir Sight</span>
-        </div>
+        </Link>
 
         {/* Right: User Button */}
         <div className="flex items-center space-x-4">
