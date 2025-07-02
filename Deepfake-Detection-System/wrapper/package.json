@@ -1,7 +1,19 @@
 {
   "name": "noirsight",
-  "version": "1.0.9",
+  "version": "1.0.11",
   "main": "dist/index.js",
+  "keywords": [
+    "deepfake",
+    "misinformation",
+    "content-moderation",
+    "fake-news",
+    "image-detection",
+    "video-analysis",
+    "news-verification",
+    "AI-moderation",
+    "trust-and-safety",
+    "noirsight"
+  ],
   "scripts": {
     "build": "tsc"
   },

@@ -3,6 +3,7 @@ import { Copy } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import ThreeBackground from '../../components/ThreeBackground';
 import DocumentationNav from '../../components/DocumentationNav';
+import { articleAnalyzer, articleResponse, imageAnalyzer, installation, mediaResponse, videoAnalyzer } from '@/constants/code';
 
 const Documentation = () => {
 	const [copied, setCopied] = useState<string | null>(null);
@@ -17,7 +18,7 @@ const Documentation = () => {
 	return (
 		<>
 			<DocumentationNav />
-			
+
 			<div className="relative min-h-screen bg-black text-white px-6 py-12 overflow-hidden">
 				<div className="absolute inset-0 z-0">
 					<ThreeBackground />
@@ -36,64 +37,43 @@ const Documentation = () => {
 						<h1 className='text-xl font-semibold mb-1'>Installation</h1>
 						<div className="relative bg-white/5 border border-white/10 rounded-lg p-4 mb-8">
 							<code className="text-sm text-gray-200">
-								npm install noirsight
+								{installation}
 							</code>
 							<button
 								onClick={() =>
 									handleCopy(
-										'npm install noirsight',
-										'video'
+										installation,
+										'video-ins'
 									)
 								}
 								className="absolute top-3 right-3 text-white text-xs bg-white/10 hover:bg-white/20 px-2 py-1 rounded-md"
 							>
-								{copied === 'video' ? 'Copied' : <Copy className="w-4 h-4" />}
+								{copied === 'video-ins' ? 'Copied' : <Copy className="w-4 h-4" />}
 							</button>
 						</div>
 
 						<h1 className='text-xl font-semibold mb-1'>Detect Deepfake Video</h1>
 						<div className="relative bg-white/5 border border-white/10 rounded-lg p-4 mb-8">
 							<pre className="text-sm text-gray-200 whitespace-pre-wrap font-mono">
-								{`import { DeepfakeVideoAnalyser } from "noirsight"
-
-const videoAnalyser = new DeepfakeVideoAnalyser(
-	process.env.NOIRSIGHT_API_KEY, 
-	url
-);
-
-const response = await videoAnalyser.analyseVideo();
-// Handle the response below:
-console.log(response);`}
+								{videoAnalyzer}
 							</pre>
 							<button
 								onClick={() =>
 									handleCopy(
-										`import { DeepfakeVideoAnalyser } from "noirsight"
-
-const videoAnalyser = new DeepfakeVideoAnalyser(
-	process.env.NOIRSIGHT_API_KEY, 
-	url
-);
-
-const response = await videoAnalyser.analyseVideo();
-// Handle the response below:
-console.log(response);`,
-										'video'
+										videoAnalyzer,
+										'video-code'
 									)
 								}
 								className="absolute top-3 right-3 text-white text-xs bg-white/10 hover:bg-white/20 px-2 py-1 rounded-md"
 							>
-								{copied === 'video' ? 'Copied' : <Copy className="w-4 h-4" />}
+								{copied === 'video-code' ? 'Copied' : <Copy className="w-4 h-4" />}
 							</button>
 						</div>
 
 						<Card className="bg-white/5 border border-white/10 rounded-2xl p-6">
 							<h3 className="text-xl mb-4 font-semibold gradient-text">JSON Output</h3>
 							<pre className="bg-black text-green-400 text-sm p-4 rounded-lg overflow-auto">
-								{`{
-    "label": "real" | "fake",
-    "confidence": 0.92
-}`}
+								{mediaResponse}
 							</pre>
 						</Card>
 					</section>
@@ -110,64 +90,43 @@ console.log(response);`,
 						<h1 className='text-xl font-semibold mb-1'>Installation</h1>
 						<div className="relative bg-white/5 border border-white/10 rounded-lg p-4 mb-8">
 							<code className="text-sm text-gray-200">
-								npm install noirsight
+								{installation}
 							</code>
 							<button
 								onClick={() =>
 									handleCopy(
-										'npm install noirsight',
-										'image'
+										installation,
+										'image-ins'
 									)
 								}
 								className="absolute top-3 right-3 text-white text-xs bg-white/10 hover:bg-white/20 px-2 py-1 rounded-md"
 							>
-								{copied === 'image' ? 'Copied' : <Copy className="w-4 h-4" />}
+								{copied === 'image-ins' ? 'Copied' : <Copy className="w-4 h-4" />}
 							</button>
 						</div>
 
-						<h1 className='text-xl font-semibold mb-1'>Detect Deepfake Video</h1>
+						<h1 className='text-xl font-semibold mb-1'>Detect Deepfake Image</h1>
 						<div className="relative bg-white/5 border border-white/10 rounded-lg p-4 mb-8">
 							<pre className="text-sm text-gray-200 whitespace-pre-wrap font-mono">
-								{`import { DeepfakeImageAnalyser } from "noirsight"
-
-const imageAnalyser = new DeepfakeImageAnalyser(
-	process.env.NOIRSIGHT_API_KEY, 
-	url
-);
-
-const response = await imageAnalyser.analyseImage();
-// Handle the response below:
-console.log(response);`}
+								{imageAnalyzer}
 							</pre>
 							<button
 								onClick={() =>
 									handleCopy(
-										`import { DeepfakeImageAnalyser } from "noirsight"
-
-const imageAnalyser = new DeepfakeImageAnalyser(
-	process.env.NOIRSIGHT_API_KEY, 
-	url
-);
-
-const response = await imageAnalyser.analyseImage();
-// Handle the response below:
-console.log(response);`,
-										'image'
+										imageAnalyzer,
+										'image-code'
 									)
 								}
 								className="absolute top-3 right-3 text-white text-xs bg-white/10 hover:bg-white/20 px-2 py-1 rounded-md"
 							>
-								{copied === 'video' ? 'Copied' : <Copy className="w-4 h-4" />}
+								{copied === 'image-code' ? 'Copied' : <Copy className="w-4 h-4" />}
 							</button>
 						</div>
 
 						<Card className="bg-white/5 border border-white/10 rounded-2xl p-6">
 							<h3 className="text-xl mb-4 font-semibold gradient-text">JSON Output</h3>
 							<pre className="bg-black text-green-400 text-sm p-4 rounded-lg overflow-auto">
-								{`{
-    "label": "real" | "fake",
-    "confidence": 0.92
-}`}
+								{mediaResponse}
 							</pre>
 						</Card>
 					</section>
@@ -184,73 +143,43 @@ console.log(response);`,
 						<h1 className='text-xl font-semibold mb-1'>Installation</h1>
 						<div className="relative bg-white/5 border border-white/10 rounded-lg p-4 mb-8">
 							<code className="text-sm text-gray-200">
-								npm install noirsight
+								{installation}
 							</code>
 							<button
 								onClick={() =>
 									handleCopy(
-										'npm install noirsight',
-										'video'
+										installation,
+										'article-ins'
 									)
 								}
 								className="absolute top-3 right-3 text-white text-xs bg-white/10 hover:bg-white/20 px-2 py-1 rounded-md"
 							>
-								{copied === 'video' ? 'Copied' : <Copy className="w-4 h-4" />}
+								{copied === 'article-ins' ? 'Copied' : <Copy className="w-4 h-4" />}
 							</button>
 						</div>
 
 						<h1 className='text-xl font-semibold mb-1'>Detect Deepfake Video</h1>
 						<div className="relative bg-white/5 border border-white/10 rounded-lg p-4 mb-8">
 							<pre className="text-sm text-gray-200 whitespace-pre-wrap font-mono">
-								{`import { ArticleAnalyser } from "noirsight"
-
-const articleAnalyzer = new ArticleAnalyser(process.env.NOIRSIGHT_API_KEY);
-const response = await articleAnalyzer.analyseArticle(text)
-
-// Handle the response below:
-console.log(response);`}
+								{articleAnalyzer}
 							</pre>
 							<button
 								onClick={() =>
 									handleCopy(
-										`import { ArticleAnalyser } from "noirsight"
-
-const articleAnalyzer = new ArticleAnalyser(process.env.NOIRSIGHT_API_KEY);
-const response = await articleAnalyzer.analyseArticle(text)
-
-// Handle the response below:
-console.log(response);`,
-										'article'
+										articleAnalyzer,
+										'article-code'
 									)
 								}
 								className="absolute top-3 right-3 text-white text-xs bg-white/10 hover:bg-white/20 px-2 py-1 rounded-md"
 							>
-								{copied === 'article' ? 'Copied' : <Copy className="w-4 h-4" />}
+								{copied === 'article-code' ? 'Copied' : <Copy className="w-4 h-4" />}
 							</button>
 						</div>
 
 						<Card className="bg-white/5 border border-white/10 rounded-2xl p-6">
 							<h3 className="text-xl mb-4 font-semibold gradient-text">JSON Output</h3>
 							<pre className="bg-black text-green-400 text-sm p-4 rounded-lg overflow-auto">
-								{`{
-    "classification": "contextual",
-    "reasons": [
-        "The paragraph expresses an opinion about a world mourning in pain, which is subjective.",
-        "The terms \"ViswaGuru\" and \"Bootlickers\" are used to describe individuals, indicating a biased interpretation rather than objective facts."
-    ],
-    "related_articles": [
-        {
-            "url": "https://punchng.com/tinubu-mourns-victims-of-tragic-air-india-plane-crash/",
-            "verdict": "weakly relevant",
-            "gemini_analysis": "Relevance Check: The reference article discusses a plane crash involving Air India and expresses condolences from President Tinubu to Prime Minister Modi. The user submission also mentions a plane crash and PM Modi. Therefore, the article is topically relevant.\nAnalysis: The article confirms that a plane crash occurred and that PM Modi is involved, as he received condolences. However, the user submission expresses opinions about Modi's actions and calls people \"bootlickers,\" which are not addressed or supported by the reference article. The article focuses on the tragedy and condolences, not on any alleged photoshoot or calls for resignation.\nVerdict: \"weakly relevant\""
-        },
-        {
-            "url": "https://timesofindia.indiatimes.com/city/ahmedabad/ahmedabad-air-india-plane-crash-news-live-air-india-london-flight-crash-sardar-vallabhbhai-patel-international-airport-deaths-injured-rescue-operation-latest-updates/liveblog/121799226.cms",
-            "verdict": "weakly relevant",
-            "gemini_analysis": "Relevance Check: The reference article discusses a plane crash in Ahmedabad involving an Air India flight. The user submission mentions a \"plane crash\" and uses hashtags related to political figures. While there's a keyword overlap (\"plane crash\"), the user's statement seems to be using the event to make a political point, whereas the article focuses on the details of the crash itself.\nAnalysis: The article provides factual information about the plane crash, including the flight details, timeline, and initial response. It does not mention anything about political figures, resignations, or the user's implied political commentary. Therefore, the article neither supports nor contradicts the user's claims; it simply ignores them. The article is primarily focused on reporting the event, not on any political ramifications.\nVerdict: \"weakly relevant\""
-        }
-    ]
-}`}
+								{articleResponse}
 							</pre>
 						</Card>
 					</section>
