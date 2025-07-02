@@ -31,3 +31,8 @@ export interface ProjectProps {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface CodeBlockProps {
+  code: string;
+  language: string;
+}

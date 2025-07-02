@@ -1,4 +1,6 @@
-export const videoAnalyzer = `import { DeepfakeVideoAnalyser } from "noirsight"
+export const videoAnalyser = `import { DeepfakeVideoAnalyser } from "noirsight"
+
+const videoUrl = "https://res.cloudinary.com/dhjyjsyvt/video/upload/v1743538578/q85tgnln6jig3pwbez78.mp4";
 
 const videoAnalyser = new DeepfakeVideoAnalyser(
 	process.env.NOIRSIGHT_API_KEY, 
@@ -10,7 +12,9 @@ const response = await videoAnalyser.analyseVideo(videoUrl);
 console.log(response);`
 
 
-export const imageAnalyzer = `import { DeepfakeImageAnalyser } from "noirsight"
+export const imageAnalyser = `import { DeepfakeImageAnalyser } from "noirsight"
+
+const imageUrl = "https://res.cloudinary.com/dhjyjsyvt/image/upload/v1750509275/utxp1rcvcktqxkkelzcr.jpg";
 
 const imageAnalyser = new DeepfakeImageAnalyser(
 	process.env.NOIRSIGHT_API_KEY, 
@@ -22,7 +26,9 @@ const response = await imageAnalyser.analyseImage(imageUrl);
 console.log(response);`
 
 
-export const articleAnalyzer = `import { ArticleAnalyser } from "noirsight"
+export const articleAnalyser = `import { ArticleAnalyser } from "noirsight"
+
+const text = "USA strikes Iran, but played \"The Good Kid\" in India's case. Ironic!";
 
 const articleAnalyzer = new ArticleAnalyser(
     process.env.NOIRSIGHT_API_KEY
@@ -37,28 +43,47 @@ console.log(response);`
 export const installation = `npm install noirsight`
 
 
-export const mediaResponse = `{
+export const videoResponse = `{
     "label": "real" | "fake",
-    "confidence": 0.92
+    "confidence": 0.92,
+    "annotedUrl": "https://res.cloudinary.com/dhjyjsyvt/video/upload/l_text:Arial_22_bold:FAKE,co_rgb:FFFFFF,b_rgb:FF0000,g_north_east,x_15,y_15,o_100/v1743538578/q85tgnln6jig3pwbez78.mp4"
+}`
+
+
+export const imageResponse = `{
+    "label": "real" | "fake",
+    "confidence": 0.92,
+    "annotedUrl": "https://res.cloudinary.com/dhjyjsyvt/image/upload/l_text:Arial_22_bold:FAKE,co_rgb:FFFFFF,b_rgb:FF0000,g_north_east,x_15,y_15,o_100/v1750509275/utxp1rcvcktqxkkelzcr.jpg"
 }`
 
 
 export const articleResponse = `{
     "classification": "contextual",
     "reasons": [
-        "The paragraph expresses an opinion about a world mourning in pain, which is subjective.",
-        "The terms \"ViswaGuru\" and \"Bootlickers\" are used to describe individuals, indicating a biased interpretation rather than objective facts."
+        "The statement \"USA strikes Iran\" could be factual, but without context or evidence, it's difficult to verify.",
+        "The phrase \"played 'The Good Kid' in India's case\" is an interpretation of US foreign policy, not a statement of objective fact.",
+        "The word \"Ironic!\" expresses an opinion about the perceived contradiction in US actions."
     ],
     "related_articles": [
         {
-            "url": "https://punchng.com/tinubu-mourns-victims-of-tragic-air-india-plane-crash/",
+            "url": "https://www.indiatoday.in/world/story/trump-trashes-reports-of-30-billion-nuclear-deal-for-iran-ridiculous-idea-2747498-2025-06-28",
             "verdict": "weakly relevant",
-            "gemini_analysis": "Relevance Check: The reference article discusses a plane crash involving Air India and expresses condolences from President Tinubu to Prime Minister Modi. The user submission also mentions a plane crash and PM Modi. Therefore, the article is topically relevant.\nAnalysis: The article confirms that a plane crash occurred and that PM Modi is involved, as he received condolences. However, the user submission expresses opinions about Modi's actions and calls people \"bootlickers,\" which are not addressed or supported by the reference article. The article focuses on the tragedy and condolences, not on any alleged photoshoot or calls for resignation.\nVerdict: \"weakly relevant\""
+            "gemini_analysis": "Relevance Check: The article discusses US-Iran relations, potential nuclear deals, and military actions between the US, Iran, and Israel. This aligns with the user's statement about US strikes on Iran and perceived differences in US foreign policy.\nAnalysis: The article confirms US strikes on Iranian nuclear sites and mentions tensions between the US and Iran. It also discusses the US's stated goal of preventing Iran from developing nuclear weapons. However, the article doesn't directly address the user's claim about the US playing \"The Good Kid\" in India's case, nor does it offer any information to support or contradict this specific comparison. The article focuses on the US-Iran conflict and nuclear program concerns.\nVerdict: weakly relevant"
         },
         {
-            "url": "https://timesofindia.indiatimes.com/city/ahmedabad/ahmedabad-air-india-plane-crash-news-live-air-india-london-flight-crash-sardar-vallabhbhai-patel-international-airport-deaths-injured-rescue-operation-latest-updates/liveblog/121799226.cms",
-            "verdict": "weakly relevant",
-            "gemini_analysis": "Relevance Check: The reference article discusses a plane crash in Ahmedabad involving an Air India flight. The user submission mentions a \"plane crash\" and uses hashtags related to political figures. While there's a keyword overlap (\"plane crash\"), the user's statement seems to be using the event to make a political point, whereas the article focuses on the details of the crash itself.\nAnalysis: The article provides factual information about the plane crash, including the flight details, timeline, and initial response. It does not mention anything about political figures, resignations, or the user's implied political commentary. Therefore, the article neither supports nor contradicts the user's claims; it simply ignores them. The article is primarily focused on reporting the event, not on any political ramifications.\nVerdict: \"weakly relevant\""
+            "url": "https://indianexpress.com/article/world/iran-israel-war-live-updates-nuclear-sites-bombs-us-donald-trump-10080761/",
+            "verdict": "strongly relevant but inconsistent",
+            "gemini_analysis": "Relevance Check: The article is highly relevant. It directly discusses a US strike on Iran, which is the central claim of the user's paragraph.\nAnalysis: The article confirms the US strike on Iran. However, it doesn't mention anything about the US playing \"The Good Kid\" in India's case, nor does it address the user's implied irony. The article focuses on international reactions to the strike.\nVerdict: strongly relevant but inconsistent"
+        },
+        {
+            "url": "https://timesofindia.indiatimes.com/world/us/30bn-for-iran-never-heard-of-this-ridiculous-idea-says-trump-dismisses-report-calls-it-a-hoax/articleshow/122125721.cms",
+            "verdict": "not relevant",
+            "gemini_analysis": "Relevance Check: The reference article discusses Donald Trump's denial of a report about a potential $30 billion deal to aid Iran's civil nuclear program. While it mentions Iran, it doesn't directly address any military strikes by the USA against Iran or any comparison to the USA's actions regarding India.\nAnalysis: The user's statement claims the USA struck Iran and acted differently towards India. The reference article only addresses a potential financial deal with Iran and doesn't mention any military action or comparison with India. Therefore, the article neither supports nor contradicts the user's claim. It ignores the core assertions about a US strike and differential treatment.\nVerdict: not relevant"
+        },
+        {
+            "url": "https://theprint.in/opinion/us-iran-nuclear-strikes-india-diplomatic-space/2666673/",
+            "verdict": "strongly relevant but inconsistent",
+            "gemini_analysis": "Relevance Check: The article is highly relevant. It discusses the US-Iran situation and its implications for India, which aligns with the user's statement about the US, Iran, and India.\nAnalysis: The user's statement claims the US \"struck Iran\" and acted as \"The Good Kid\" in India's case, implying a double standard. The article confirms the US strike on Iran. It also suggests that the US's actions, while seemingly detrimental to India in the short term (Trump's rhetoric favoring Pakistan), might inadvertently benefit India by allowing it to maintain a safe distance from the conflict and avoid being associated with the US's actions against Iran. The article doesn't directly address the \"Good Kid\" aspect but implies that the US's relationship with Pakistan was driven by strategic interests related to Iran, not necessarily a genuine desire to help India. The article provides context for the US's actions and their potential consequences for India, which can be interpreted as both supporting and contradicting the user's statement depending on the interpretation of \"The Good Kid\".\nVerdict: strongly relevant but inconsistent"
         }
     ]
 }`
