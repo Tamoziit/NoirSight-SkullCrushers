@@ -163,4 +163,3 @@ You can generate these from the [NoirSight Developer Portal](https://noirsight.a
 
 MIT License © 2025 NoirSight
 
-```
