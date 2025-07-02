@@ -16,10 +16,11 @@ import Dashboard from "./pages/dashboard/Dashboard";
 import Home from "./pages/home/Home";
 
 const queryClient = new QueryClient();
+const civicAuthId = import.meta.env.VITE_CIVIC_AUTH_ID;
 
 const App = () => (
   <>
-    <Web2AuthProvider clientId="d22021c1-9343-4541-bcc6-646f370a9a2f">
+    <Web2AuthProvider clientId={civicAuthId}>
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
           <Sonner />
