@@ -1,6 +1,6 @@
 {
   "name": "noirsight",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "main": "dist/index.js",
   "keywords": [
     "deepfake",

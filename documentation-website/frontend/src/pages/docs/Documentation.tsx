@@ -3,7 +3,8 @@ import { Copy } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import ThreeBackground from '../../components/ThreeBackground';
 import DocumentationNav from '../../components/DocumentationNav';
-import { articleAnalyzer, articleResponse, imageAnalyzer, installation, mediaResponse, videoAnalyzer } from '@/constants/code';
+import { articleAnalyser, articleResponse, imageAnalyser, imageResponse, installation, videoAnalyser, videoResponse } from '@/constants/code';
+import CodeBlock from '@/components/CodeBlock';
 
 const Documentation = () => {
 	const [copied, setCopied] = useState<string | null>(null);
@@ -31,14 +32,15 @@ const Documentation = () => {
 							Deepfake <span className="gradient-text">Video Detection</span>
 						</h1>
 						<p className="text-gray-300 inter-font text-lg leading-relaxed mb-8">
-							Analyze a video to detect synthetic content using our deepfake detection engine. Upload an `.mp4` file and receive AI-based verdict with confidence levels.
+							Analyse a video to detect synthetic content using our deepfake detection engine. Upload an `.mp4` file and receive AI-based verdict with confidence levels.
 						</p>
 
 						<h1 className='text-xl font-semibold mb-1'>Installation</h1>
-						<div className="relative bg-white/5 border border-white/10 rounded-lg p-4 mb-8">
-							<code className="text-sm text-gray-200">
-								{installation}
-							</code>
+						<div className="relative bg-white/5 border border-white/10 rounded-lg pt-8 px-4 pb-4 mb-8">
+							<CodeBlock
+								code={installation}
+								language="bash"
+							/>
 							<button
 								onClick={() =>
 									handleCopy(
@@ -53,14 +55,15 @@ const Documentation = () => {
 						</div>
 
 						<h1 className='text-xl font-semibold mb-1'>Detect Deepfake Video</h1>
-						<div className="relative bg-white/5 border border-white/10 rounded-lg p-4 mb-8">
-							<pre className="text-sm text-gray-200 whitespace-pre-wrap font-mono">
-								{videoAnalyzer}
-							</pre>
+						<div className="relative bg-white/5 border border-white/10 rounded-lg pt-8 px-4 pb-4 mb-8">
+							<CodeBlock
+								code={videoAnalyser}
+								language="typescript"
+							/>
 							<button
 								onClick={() =>
 									handleCopy(
-										videoAnalyzer,
+										videoAnalyser,
 										'video-code'
 									)
 								}
@@ -72,9 +75,10 @@ const Documentation = () => {
 
 						<Card className="bg-white/5 border border-white/10 rounded-2xl p-6">
 							<h3 className="text-xl mb-4 font-semibold gradient-text">JSON Output</h3>
-							<pre className="bg-black text-green-400 text-sm p-4 rounded-lg overflow-auto">
-								{mediaResponse}
-							</pre>
+							<CodeBlock
+								code={videoResponse}
+								language="json"
+							/>
 						</Card>
 					</section>
 
@@ -84,14 +88,15 @@ const Documentation = () => {
 							Deepfake <span className="gradient-text">Image Detection</span>
 						</h1>
 						<p className="text-gray-300 inter-font text-lg leading-relaxed mb-8">
-							Scan images to detect facial morphing, GAN-generated visuals, or tampered photos. Our model analyzes subtle patterns to catch AI-edited fakes.
+							Scan images to detect facial morphing, GAN-generated visuals, or tampered photos. Our model analyses subtle patterns to catch AI-edited fakes.
 						</p>
 
 						<h1 className='text-xl font-semibold mb-1'>Installation</h1>
-						<div className="relative bg-white/5 border border-white/10 rounded-lg p-4 mb-8">
-							<code className="text-sm text-gray-200">
-								{installation}
-							</code>
+						<div className="relative bg-white/5 border border-white/10 rounded-lg pt-8 px-4 pb-4 mb-8">
+							<CodeBlock
+								code={installation}
+								language="bash"
+							/>
 							<button
 								onClick={() =>
 									handleCopy(
@@ -106,14 +111,15 @@ const Documentation = () => {
 						</div>
 
 						<h1 className='text-xl font-semibold mb-1'>Detect Deepfake Image</h1>
-						<div className="relative bg-white/5 border border-white/10 rounded-lg p-4 mb-8">
-							<pre className="text-sm text-gray-200 whitespace-pre-wrap font-mono">
-								{imageAnalyzer}
-							</pre>
+						<div className="relative bg-white/5 border border-white/10 rounded-lg pt-8 px-4 pb-4 mb-8">
+							<CodeBlock
+								code={imageAnalyser}
+								language="typescript"
+							/>
 							<button
 								onClick={() =>
 									handleCopy(
-										imageAnalyzer,
+										imageAnalyser,
 										'image-code'
 									)
 								}
@@ -125,9 +131,10 @@ const Documentation = () => {
 
 						<Card className="bg-white/5 border border-white/10 rounded-2xl p-6">
 							<h3 className="text-xl mb-4 font-semibold gradient-text">JSON Output</h3>
-							<pre className="bg-black text-green-400 text-sm p-4 rounded-lg overflow-auto">
-								{mediaResponse}
-							</pre>
+							<CodeBlock
+								code={imageResponse}
+								language="json"
+							/>
 						</Card>
 					</section>
 
@@ -141,10 +148,11 @@ const Documentation = () => {
 						</p>
 
 						<h1 className='text-xl font-semibold mb-1'>Installation</h1>
-						<div className="relative bg-white/5 border border-white/10 rounded-lg p-4 mb-8">
-							<code className="text-sm text-gray-200">
-								{installation}
-							</code>
+						<div className="relative bg-white/5 border border-white/10 rounded-lg pt-8 px-4 pb-4 mb-8">
+							<CodeBlock
+								code={installation}
+								language="bash"
+							/>
 							<button
 								onClick={() =>
 									handleCopy(
@@ -159,14 +167,15 @@ const Documentation = () => {
 						</div>
 
 						<h1 className='text-xl font-semibold mb-1'>Detect Deepfake Video</h1>
-						<div className="relative bg-white/5 border border-white/10 rounded-lg p-4 mb-8">
-							<pre className="text-sm text-gray-200 whitespace-pre-wrap font-mono">
-								{articleAnalyzer}
-							</pre>
+						<div className="relative bg-white/5 border border-white/10 rounded-lg pt-8 px-4 pb-4 mb-8">
+							<CodeBlock
+								code={articleAnalyser}
+								language="typescript"
+							/>
 							<button
 								onClick={() =>
 									handleCopy(
-										articleAnalyzer,
+										articleAnalyser,
 										'article-code'
 									)
 								}
@@ -178,9 +187,10 @@ const Documentation = () => {
 
 						<Card className="bg-white/5 border border-white/10 rounded-2xl p-6">
 							<h3 className="text-xl mb-4 font-semibold gradient-text">JSON Output</h3>
-							<pre className="bg-black text-green-400 text-sm p-4 rounded-lg overflow-auto">
-								{articleResponse}
-							</pre>
+							<CodeBlock
+								code={articleResponse}
+								language="json"
+							/>
 						</Card>
 					</section>
 
@@ -195,15 +205,15 @@ const Documentation = () => {
 
 						<div className="space-y-12">
 							{/* Step 1 */}
-							<div className="flex flex-col md:flex-row items-start md:items-center gap-6">
-								<div className="md:w-2/3">
-									<h3 className="text-xl font-semibold gradient-text mb-2">Step 1: Install</h3>
-									<p className="text-gray-300 inter-font">
+							<div className="flex flex-col md:flex-row justify-between items-center gap-6">
+								<div className="w-full md:w-1/2">
+									<h3 className="text-2xl font-semibold gradient-text mb-2">Step 1: Install</h3>
+									<p className="text-gray-300 text-lg inter-font">
 										Install the NoirSight Extension from the Chrome Web Store and pin it to your toolbar.
 									</p>
 								</div>
-								<div className="md:w-1/3">
-									<Card className="bg-white/5 border border-white/10 rounded-2xl p-3">
+								<div className="w-full md:w-1/2 flex justify-end">
+									<Card className="bg-white/5 border border-white/10 rounded-2xl p-3 w-full md:w-[80%]">
 										<img
 											src="eye.png"
 											alt="Install Extension"
@@ -214,15 +224,15 @@ const Documentation = () => {
 							</div>
 
 							{/* Step 2 */}
-							<div className="flex flex-col md:flex-row items-start md:items-center gap-6">
-								<div className="md:w-2/3">
-									<h3 className="text-xl font-semibold gradient-text mb-2">Step 2: Scan Article</h3>
-									<p className="text-gray-300 inter-font">
+							<div className="flex flex-col md:flex-row justify-between items-center gap-6">
+								<div className="w-full md:w-1/2">
+									<h3 className="text-2xl font-semibold gradient-text mb-2">Step 2: Scan Article</h3>
+									<p className="text-gray-300 text-lg inter-font">
 										While reading an article, click the extension icon.
 									</p>
 								</div>
-								<div className="md:w-1/3">
-									<Card className="bg-white/5 border border-white/10 rounded-2xl p-3">
+								<div className="w-full md:w-1/2 flex justify-end">
+									<Card className="bg-white/5 border border-white/10 rounded-2xl p-3 w-full md:w-[80%]">
 										<img
 											src="/ss1.png"
 											alt="Scan Article"
@@ -233,15 +243,15 @@ const Documentation = () => {
 							</div>
 
 							{/* Step 3 */}
-							<div className="flex flex-col md:flex-row items-start md:items-center gap-6">
-								<div className="md:w-2/3">
-									<h3 className="text-xl font-semibold gradient-text mb-2">Step 3: See Statistics</h3>
-									<p className="text-gray-300 inter-font">
+							<div className="flex flex-col md:flex-row justify-between items-center gap-6">
+								<div className="w-full md:w-1/2">
+									<h3 className="text-2xl font-semibold gradient-text mb-2">Step 3: See Statistics</h3>
+									<p className="text-gray-300 text-lg inter-font">
 										You'll instantly see AI-verified credibility scores right below the headline.
 									</p>
 								</div>
-								<div className="md:w-1/3">
-									<Card className="bg-white/5 border border-white/10 rounded-2xl p-3">
+								<div className="w-full md:w-1/2 flex justify-end">
+									<Card className="bg-white/5 border border-white/10 rounded-2xl p-3 w-full md:w-[80%]">
 										<img
 											src="/ss2.png"
 											alt="Scan Article"
@@ -252,9 +262,6 @@ const Documentation = () => {
 							</div>
 						</div>
 					</section>
-
-
-
 				</div>
 			</div>
 		</>
