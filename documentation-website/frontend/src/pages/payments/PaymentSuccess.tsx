@@ -2,8 +2,8 @@ import ApiKeyCard from "@/components/ApiKeyCard";
 import ThreeBackground from "@/components/ThreeBackground";
 import useCreateProject from "@/hooks/useCreateProject";
 import { ApiKeyData } from "@/types";
-import { useEffect, useRef, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { FaCheck, FaSpinner } from "react-icons/fa";
 
 const PaymentSuccess = () => {
@@ -11,7 +11,7 @@ const PaymentSuccess = () => {
 	const sessionId = searchParams.get("session_id");
 	const [apiData, setApiData] = useState<ApiKeyData>();
 	const { loading, createProject } = useCreateProject();
-	const hasFetched = useRef(false);
+	const navigate = useNavigate();
 
 	const fetchApiData = async () => {
 		if (!sessionId) return;
@@ -55,18 +55,18 @@ const PaymentSuccess = () => {
 						<div className="space-y-6">
 							<div className="bg-gray-800/50 rounded-lg p-6">
 								<h2 className="text-xl font-semibold text-white mb-4">Subscription Details</h2>
-								
+
 								<div className="space-y-3">
 									<div className="flex justify-between">
 										<span className="text-gray-400">Type:</span>
 										<span className="text-white font-medium">Pro</span>
 									</div>
-									
+
 									<div className="flex justify-between">
 										<span className="text-gray-400">Duration:</span>
 										<span className="text-white font-medium">3 months</span>
 									</div>
-									
+
 									<div className="flex justify-between">
 										<span className="text-gray-400">Amount:</span>
 										<span className="text-white font-medium text-lg">₹299.99</span>
@@ -104,20 +104,29 @@ const PaymentSuccess = () => {
 								</div>
 							)}
 
-							<button
-								onClick={fetchApiData}
-								disabled={loading || !sessionId}
-								className="w-full enhanced-primary-button py-3 px-6 rounded-lg text-white font-medium disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:scale-105"
-							>
-								{loading ? (
-									<div className="flex items-center justify-center">
-										<FaSpinner className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" />
-										Confirming Payment...
-									</div>
-								) : (
-									"Confirm Payment"
-								)}
-							</button>
+							<div className="flex gap-5">
+								<button
+									className="w-full enhanced-primary-button py-3 px-6 rounded-lg text-white font-medium disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:scale-105"
+									onClick={() => navigate(`/payment/cancel/${sessionId}`)}
+								>
+									Cancel Subscription
+								</button>
+
+								<button
+									onClick={fetchApiData}
+									disabled={loading || !sessionId}
+									className="w-full enhanced-primary-button py-3 px-6 rounded-lg text-white font-medium disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 hover:scale-105"
+								>
+									{loading ? (
+										<div className="flex items-center justify-center">
+											<FaSpinner className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" />
+											Confirming Payment...
+										</div>
+									) : (
+										"Confirm Payment"
+									)}
+								</button>
+							</div>
 						</div>
 					</div>
 				)}
